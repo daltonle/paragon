@@ -1,1 +1,1 @@
-Paragon - Database Information System
+# Paragon - Database Information System
