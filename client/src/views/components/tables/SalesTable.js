@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ReactTable from 'react-table'
+import { actionColumn } from './ActionColumn'
 
 import { getSales } from '../../../state/ducks/sales/actions'
 
@@ -45,7 +46,8 @@ class SalesTable extends Component {
       {
         Header: "Items",
         accessor: "items"
-      }
+      },
+      { ...actionColumn }
     ]
 
     return (

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ReactTable from 'react-table'
+import { actionColumn } from './ActionColumn'
 
 import { getCustomers } from '../../../state/ducks/customers/actions'
 
@@ -80,7 +81,8 @@ class CustomersTable extends Component {
       {
         Header: "Interests",
         accessor: "interests"
-      }
+      },
+      { ...actionColumn }
     ]
 
     return (
