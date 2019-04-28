@@ -1,1 +1,1 @@
-export { default as reducer1 } from './reducer1/reducers'
+export { default as customers } from './customers/reducers'

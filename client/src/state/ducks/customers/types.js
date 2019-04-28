@@ -1,0 +1,1 @@
+export const GET_CUSTOMERS = 'customers/GET_CUSTOMERS'

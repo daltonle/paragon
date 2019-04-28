@@ -1,0 +1,17 @@
+@import '../../../styles/colors.scss';
+@import '../../../styles/font.scss';
+
+.outer {
+  display: flex;
+  flex-direction: row;
+}
+
+.appbar {
+  
+}
+
+.content {
+  flex-grow: 1;
+  padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+}
+
