@@ -9,7 +9,7 @@ export default class SalesPage extends Component {
     return (
       <div className={styles.outer}>
         <div className={styles.appbar}>
-          <Appbar />
+          <Appbar active="sales" />
         </div>
         <div className={styles.content}>
           <SalesTable />

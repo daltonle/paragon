@@ -1,4 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import classNames from 'classnames'
+
 import styles from './Appbar.module.scss'
 
 /**
@@ -7,17 +10,13 @@ import styles from './Appbar.module.scss'
 export const Appbar = (props) => (
   <div className={styles.container}>
     <div className={styles.username}>
-      timothy65
+      timothy
     </div>
     <div className={styles.header}>
-      DATABASE
+      
     </div>
-    <div className={styles.section}>
-      Sales
-    </div>
-    <div className={styles.section}>
-      Customers
-    </div>
+    <Link to="/sales" className={classNames({[styles.menuActive]: props.active === 'sales', [styles.section]: true})}>Sales</Link>
+    <Link to="/customers" className={classNames({[styles.menuActive]: props.active === 'customers', [styles.section]: true})}>Customers</Link>
     <div className={styles.section}>
       Models
     </div>
@@ -28,7 +27,7 @@ export const Appbar = (props) => (
       Locations
     </div>
     <div className={styles.header}>
-      PEOPLE
+      
     </div>
     <div className={styles.section}>
       Groups
