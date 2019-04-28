@@ -1,0 +1,43 @@
+@import '../../../styles/colors.scss';
+@import '../../../styles/font.scss';
+
+.container {
+  background-color: $dark-purple;
+  height: 100vh;
+  width: 8rem;
+  padding-left: 2.5em;
+  padding-right: 2.5em;
+  box-shadow: 0.1875em 0.1875em 0.375em rgba(0, 0, 0, .3);
+  vertical-align: middle;
+  color: $text-white;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.username {
+  margin-top: 2.5rem;
+  margin-bottom: 3rem;
+  color: $text-white;
+  cursor: pointer;
+}
+
+.header {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  color: $text-white;
+}
+
+.section {
+  margin-bottom: .5rem;
+  color: $text-white;
+  cursor: pointer;
+}
+
+.logout {
+  margin-top: auto;
+  margin-bottom: 2.5rem;
+  color: $text-white;
+  justify-self: flex-end;
+  cursor: pointer;
+}
