@@ -90,7 +90,7 @@ class CustomersTable extends Component {
         <ReactTable
           data={data}
           columns={columns}
-          defaultPageSize={12}
+          defaultPageSize={10}
           className="-striped -highlight"
           showPaginationTop
           showPageSizeOptions={false}
