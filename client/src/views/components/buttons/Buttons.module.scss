@@ -1,0 +1,12 @@
+@import '../../../styles/colors.scss';
+@import '../../../styles/font.scss';
+
+.buttonNormal {
+  background-color: $blue;
+  color: $text-white;
+  width: 8rem;
+  padding: .75rem .75rem .75rem .75rem;
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 0.1875rem 0.1875rem 0.375rem rgba(0, 0, 0, .3);
+}

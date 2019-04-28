@@ -57,7 +57,6 @@ class SalesTable extends Component {
           columns={columns}
           defaultPageSize={10}
           className="-striped -highlight"
-          showPaginationTop
           showPageSizeOptions={false}
           filterable
           defaultFilterMethod={(filter, row) =>
