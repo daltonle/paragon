@@ -12,11 +12,11 @@ export default class CustomersPage extends Component {
         <div className={styles.appbar}>
           <Appbar active="customers" />
         </div>
-        <div className={styles.header}>
-          <h1>Customers</h1>
-          <ButtonNormal name="Add record" className={styles.button} />
-        </div>
         <div className={styles.content}>
+          <div className={styles.header}>
+            <h1>Customers</h1>
+            <ButtonNormal name="Add record" className={styles.button} />
+          </div>
           <CustomersTable />
         </div>
       </div>
