@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import ReactTable from 'react-table'
 
 import { getCustomers } from '../../../state/ducks/customers/actions'
 
 import 'react-table/react-table.css'
-import styles from './CustomersTable.module.scss'
 
 class CustomersTable extends Component {
   componentDidMount = () => {
