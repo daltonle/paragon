@@ -6,11 +6,16 @@ import { ButtonNormal } from '../../components/buttons/Buttons'
 import styles from './CustomersPage.module.scss'
 
 export default class CustomersPage extends Component {
+  componentDidMount = () => {
+    if (sessionStorage.getItem("loggedIn") !== "true")
+      this.props.history.push('/login')
+  }
+
   render() {
     return (
       <div className={styles.outer}>
         <div className={styles.appbar}>
-          <Appbar active="customers" />
+          <Appbar active="customers" history={this.props.history} />
         </div>
         <div className={styles.content}>
           <div className={styles.header}>

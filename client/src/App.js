@@ -5,6 +5,7 @@ import "./App.scss"
 import store from "./state/store"
 import CustomersPage from "./views/pages/customers/CustomersPage"
 import SalesPage from "./views/pages/sales/SalesPage"
+import LoginPage from "./views/pages/login/LoginPage"
 
 class App extends Component {
   render() {
@@ -12,8 +13,9 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
           <Switch>
-            <Route path='/customers' component={CustomersPage} />
-            <Route path='/sales' component={SalesPage} />
+            <Route path='/login' render={ props => <LoginPage {...props}/> } />
+            <Route path='/customers' render={ props => <CustomersPage {...props}/> } />
+            <Route path={['/', '/sales']} render={ props => <SalesPage {...props}/> } />
           </Switch>
         </div>
       </Provider>
