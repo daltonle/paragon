@@ -50,27 +50,29 @@ class LoginPage extends Component {
               isSubmitting
             }) => (
               <form onSubmit={handleSubmit} className={styles.form}>
-                <input
-                  type="username"
-                  name="username"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.username}
-                  placeholder="Username"
-                  className={styles.textField}
-                />
-                <h6 className={styles.errors}>{errors.username && touched.username && errors.username}</h6>
-                <input
-                  type="password"
-                  name="password"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.password}
-                  placeholder="Password"
-                  className={styles.textField}
-                />
-                <h6 className={styles.errors}>{errors.password && touched.password && errors.password}</h6>
-                <h6 className={styles.errors}>{status && status.message && status.message}</h6>
+                <div className={styles.input}>
+                  <input
+                    type="username"
+                    name="username"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.username}
+                    placeholder="Username"
+                    className={styles.textField}
+                  />
+                  <h6 className={styles.errors}>{errors.username && touched.username && errors.username}</h6>
+                  <input
+                    type="password"
+                    name="password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password}
+                    placeholder="Password"
+                    className={styles.textField}
+                  />
+                  <h6 className={styles.errors}>{errors.password && touched.password && errors.password}</h6>
+                  <h6 className={styles.errors}>{status && status.message && status.message}</h6>
+                </div>
                 <button type="submit" disabled={isSubmitting} className={styles.button}>
                   LOG IN
                 </button>

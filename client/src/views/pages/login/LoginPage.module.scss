@@ -19,6 +19,9 @@
   padding: 2.5rem 2.5rem 2.5rem 2.5rem;
   background: #fff;
 
+  display: flex;
+  flex-direction: column;
+
   h1 {
     margin: 0;
     margin-bottom: 1.5rem;
@@ -26,17 +29,20 @@
 }
 
 .form {
-  
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .textField {
-  width: 360px;
+  width: calc(100% - 1.5rem);
   background: #fff;
   color: #a3a3a3;
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
   border: 0;
   outline: 0;
-  padding: 22px 18px;
+  padding: 1.5rem 1rem;
 }
 
 .button {
@@ -52,7 +58,6 @@
   margin-top: 1rem;
   text-align: center;
   border-radius: 3px;
-  margin-top: auto;
 }
 
 .button:hover {
