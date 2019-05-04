@@ -12,6 +12,5 @@ class Profile(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     address = models.CharField(max_length=255,null=True, blank=True)
     phoneNum = models.IntegerField(null=True, blank=True)
-    creditLine = models.FloatField(null=True, blank=True)
-    balance = models.FloatField(null=True, blank=True)
+
 

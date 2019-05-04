@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Profile
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
-from django.db.models import Q
+
 from rest_framework_jwt.settings import api_settings
 
 User = get_user_model()
@@ -82,10 +82,10 @@ class UserSerializer(serializers.ModelSerializer):
         return validated_data
 
     def update(self, instance, validated_data):
-        username = validated_data.get('username',instance.username)
-        email = validated_data.get('email', instance.email)
-        first_name = validated_data.get('first_name', instance.first_name)
-        last_name = validated_data.get(' last_name', instance. last_name)
+        instance.username = validated_data.get('username',instance.username)
+        instance.email = validated_data.get('email', instance.email)
+        instance.first_name = validated_data.get('first_name', instance.first_name)
+        instance.last_name = validated_data.get(' last_name', instance. last_name)
         profile_data = validated_data.pop('profile')
         profile = instance.profile
         profile.address = profile_data.get('address',profile.address)
