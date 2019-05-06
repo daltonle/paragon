@@ -19,15 +19,15 @@ class LoginPage extends Component {
           <Formik
             initialValues={{ username: '', password: '' }}
             validate={values => {
-              let errors = {};
+              let errors = {}
               if (!values.username) {
-                errors.username = 'Required';
+                errors.username = 'Required'
               } else if (
                 !/^[A-Za-z0-9]{6,10}$/i.test(values.username)
               ) {
-                errors.username = 'Invalid username';
+                errors.username = 'Invalid username'
               }
-              return errors;
+              return errors
             }}
             onSubmit={(values, { setSubmitting, setStatus }) => {
               if (login(values)) {
