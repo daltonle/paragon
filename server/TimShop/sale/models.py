@@ -1,15 +1,21 @@
 from django.db import models
-from django.contrib.auth.models import User
+
 # Create your models here.
+
+
 class SaleRecord(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    buyer = models.ForeignKey('customers.Customer',related_name='buyer' ,on_delete=models.CASCADE, default=None)
     date = models.DateTimeField(auto_now_add=True)
     total = models.FloatField()
     discount = models.FloatField()
 
     def __str__(self):
-        return self.user +" "+ self.date
+        return '%s: %d' % (self.date, self.total)
+
 
 class SoldItem(models.Model):
-    SaleRecord = models.ForeignKey(SaleRecord, on_delete=models.CASCADE)
-    modelSupplyBy = models.ForeignKey('productModel.ModelSupplyBy', on_delete=models.CASCADE)
+    saleRecord = models.ForeignKey(SaleRecord,related_name='saleRecord', on_delete=models.CASCADE)
+    modelSupp = models.ForeignKey('productModel.ModelSupp', related_name='modelSupp', on_delete=models.CASCADE,)
+
+    def __str__(self):
+        return self.modelSupp
