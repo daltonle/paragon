@@ -2,9 +2,14 @@ from .models import Customer, Interest
 from rest_framework import serializers
 
 
+class InterestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Interest
+        fields = ('subjectArea', 'type',)
+
+
 class CustomerSerializer(serializers.ModelSerializer):
     interests = serializers.StringRelatedField(many=True)
-
     class Meta:
         model = Customer
         fields = ('name', 'address', 'phoneNum', 'creditLine', 'curBalance', 'email', 'status', 'interests')
@@ -14,8 +19,9 @@ class CustomerSerializer(serializers.ModelSerializer):
             customer_obj = Customer.objects.create(**validated_data)
 
             for interest in interest_data:
-                 Interest.objects.create(owner = customer_obj)
+                 Interest.objects.create(owner = customer_obj, **interest)
             return customer_obj
+
         def update(self, instance, validated_data):
             interest_data = validated_data.pop('interests')
 
@@ -34,12 +40,6 @@ class CustomerSerializer(serializers.ModelSerializer):
                 )
 
             return instance
-
-
-class InterestSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Interest
-        fields = ('subjectArea', 'type',)
 
 
 

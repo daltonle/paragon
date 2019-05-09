@@ -5,7 +5,11 @@ from .serializers import PModelSerializer, SupplierSerializer, ModelSuppSerializ
 from locations.models import Location
 from rest_framework.response import Response
 from rest_framework import status
-
+from rest_framework.permissions import (
+    IsAuthenticated,
+    IsAdminUser,
+)
+from .permissions import IsSuperUser
 # Create your views here.
 
 
@@ -13,10 +17,26 @@ class PModelViewSet(viewsets.ModelViewSet):
     queryset = PModel.objects.all()
     serializer_class = PModelSerializer
 
+    def get_permissions(self):
+        permission_classes = []
+        if self.action == 'create' or self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update':
+            permission_classes = [IsAuthenticated, IsAdminUser]
+        elif self.action == 'list' or self.action == 'destroy':
+            permission_classes = [IsSuperUser]
+        return [permission() for permission in permission_classes]
+
 
 class SupplierViewSet(viewsets.ModelViewSet):
     queryset = Supplier.objects.all()
     serializer_class = SupplierSerializer
+
+    def get_permissions(self):
+        permission_classes = []
+        if self.action == 'create' or self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update':
+            permission_classes = [IsAuthenticated, IsAdminUser]
+        elif self.action == 'list' or self.action == 'destroy':
+            permission_classes = [IsSuperUser]
+        return [permission() for permission in permission_classes]
 
 
 
@@ -36,4 +56,12 @@ class ModelSuppViewSet(viewsets.ModelViewSet):
         serializer.save(location=Location)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def get_permissions(self):
+        permission_classes = []
+        if self.action == 'create' or self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update':
+            permission_classes = [IsAuthenticated, IsAdminUser]
+        elif self.action == 'list' or self.action == 'destroy':
+            permission_classes = [IsSuperUser]
+        return [permission() for permission in permission_classes]
 
