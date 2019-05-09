@@ -12,5 +12,9 @@ class Profile(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     address = models.CharField(max_length=255,null=True, blank=True)
     phoneNum = models.IntegerField(null=True, blank=True)
+    isFrontstaff = models.BooleanField(default=False)
+    isBackstaff= models.BooleanField(default=False)
+
+
 
 
