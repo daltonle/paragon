@@ -1,5 +1,6 @@
 import { 
-  GET_CUSTOMERS
+  GET_CUSTOMERS,
+  UPDATE_CUSTOMER
 } from "./types"
 
 const initialState = { }
@@ -10,6 +11,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         data: action.payload
+      }
+    case UPDATE_CUSTOMER:
+      return {
+        ...state,
+        data: [...state.data, action.payload]
       }
     default:
       return state

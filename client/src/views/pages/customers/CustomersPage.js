@@ -10,7 +10,9 @@ export default class CustomersPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      adding: true
+      adding: false,
+      updating: false,
+      updatedCustomer: {}
     }
   }
 
@@ -24,6 +26,7 @@ export default class CustomersPage extends Component {
       return (
         <CustomerForm 
           onCancel={() => this.setState({ adding: false })}  
+          onFinish={() => this.setState({ adding: false })}
         />
       )
     else return (

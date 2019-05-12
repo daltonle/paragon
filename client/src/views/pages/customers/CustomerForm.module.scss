@@ -16,16 +16,25 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 60%;
 }
 
 .textField {
   width: calc(100% - 1.5rem);
   background: #fff;
-  color: #a3a3a3;
+  color: $black;
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
   border: 0;
   outline: 0;
   padding: 1.5rem 1rem;
+}
+
+label > span {
+  font-weight: $font-weight-heavy;
+}
+
+label > input {
+  margin-top: .5rem;
 }
 
 .formButton {
@@ -47,9 +56,52 @@
   border-bottom-color: $teal;
 }
 
+.textField:disabled {
+  background: $neutral-color-2;
+}
+
 h6.errors {
   margin: 0;
   margin-top: 1rem;
   margin-bottom: 1rem;
   color: $red;
+}
+
+.creditLine {
+  display: flex;
+  flex-direction: row;
+
+  .inputField {
+    flex-basis: 60%;
+    margin-right: 2.5rem;
+  }
+
+  .toggleButton {
+    padding-top: 2rem;
+  }
+}
+
+.clubMember {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  .toggle {
+    margin-left: 1rem;
+  }
+}
+
+.interests {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  label {
+    flex-basis: 45%;
+
+    .selectInput {
+      margin-top: .5rem;
+    }
+  }
 }
