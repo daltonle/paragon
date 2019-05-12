@@ -95,7 +95,7 @@ db.sqlite3
 ../../.idea/
 ../.DS_Store
 ../.idea/
-TimShop/
+
 
 # Generated files
 .idea/**/contentModel.xml
