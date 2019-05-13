@@ -5,7 +5,7 @@ from django.db import models
 
 class SaleRecord(models.Model):
     id = models.AutoField(primary_key=True)
-    customerId = models.ForeignKey('customers.Customer', related_name='id', on_delete=models.CASCADE, null=False)
+    customerId = models.ForeignKey('customers.Customer', related_name='customer_id', on_delete=models.CASCADE, null=False)
     date = models.DateTimeField(auto_now_add=True, null=False, blank=False)
     value = models.FloatField(null=False, blank=False)
     discount = models.FloatField(null=False, blank=False)

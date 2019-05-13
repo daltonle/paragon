@@ -10,7 +10,7 @@ class Customer(models.Model):
     phone = models.CharField(_('Phone'), max_length=11, null=False, blank=False)
     creditLine = models.CharField(_('credit line'), max_length=10)
     hasCreditLine = models.BooleanField(null=False, blank=False, default=False)
-    balance = models.DecimalField(max_length=4, default=0, null=False, blank=False)
+    balance = models.DecimalField(max_digits=6, decimal_places=2, default=0, null=False, blank=False)
     isMember = models.BooleanField(null=False, blank=False, default=False)
     joinDate = models.DateTimeField()
     subjectInterests = models.CharField(max_length=255)

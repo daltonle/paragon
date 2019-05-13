@@ -9,7 +9,7 @@ class Supplier(models.Model):
     address = models.CharField(max_length=255, null=False, blank=False)
     creditLine = models.CharField(max_length=10)
     hasCreditLine = models.BooleanField(default=False, null=False)
-    balance = models.DecimalField(max_length=4, null=False)
+    balance = models.DecimalField(null=False, max_digits=6, decimal_places=2)
     deliveNotesr = models.CharField(max_length=255)
     contactPerson = models.CharField(max_length=255)
 
@@ -22,7 +22,7 @@ class PModel(models.Model):
     type = models.IntegerField(choices=STATUS_CHOICES, default=1)
     subject = models.IntegerField(choices=STATUS_CHOICES, default=1)
     inStock = models.IntegerField(null=False)
-    price = models.DecimalField()
+    price = models.DecimalField(max_digits=6, decimal_places=2)
     dateAcquired = models.DateField(auto_now_add=True, null=False, blank=False)
     location = models.ForeignKey("locations.Location", null=True,on_delete=models.SET_NULL)
     description = models.CharField(max_length=500, null=True)
@@ -46,9 +46,9 @@ class ModelSupp(models.Model):
 
 class OrderHistory(models.Model):
     id = models.AutoField(primary_key=True)
-    supplierId = models.ForeignKey(Supplier, related_name='id', on_delete=models.CASCADE,null=False)
+    supplierId = models.ForeignKey(Supplier, related_name='supploer_id', on_delete=models.CASCADE,null=False)
     time = models.DateTimeField(null=False)
-    value = models.DecimalField(null=False)
+    value = models.DecimalField(null=False, max_digits=6, decimal_places=2)
     items = models.CharField(max_length=255, null=False)
 
     def __str__(self):
@@ -56,6 +56,6 @@ class OrderHistory(models.Model):
 
 class SupplierCatalogue(models.Model):
     id = models.AutoField(primary_key=True)
-    supplierId = models.ForeignKey(Supplier, related_name='id', on_delete=models.CASCADE, null=False)
-    itemId = models.ForeignKey(PModel, related_name='id', on_delete=models.CASCADE, null=False)
-    price = models.DecimalField(null=False)
+    supplierId = models.ForeignKey(Supplier, related_name='supplier_id', on_delete=models.CASCADE, null=False)
+    itemId = models.ForeignKey(PModel, related_name='item_id', on_delete=models.CASCADE, null=False)
+    price = models.DecimalField(null=False, max_digits=6, decimal_places=2)
