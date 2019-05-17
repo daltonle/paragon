@@ -1,22 +1,17 @@
 from rest_framework import serializers
 from .models import SaleRecord, SoldItem
 from customers.serializers import CustomerSerializer
-from productModel.serializers import ModelSuppSerializer
+from customers.models import Customer
+from productModel.serializers import  PModelSerializer
+from productModel.models import  PModel
 
 class SaleRecordSerializer(serializers.ModelSerializer):
-    buyer = CustomerSerializer(many=False)
+    customer_id = serializers.PrimaryKeyRelatedField(queryset=Customer.objects.all(), source='customer_id')
 
     class Meta:
         model = SaleRecord
-        fields = ('buyer', 'date', 'total', 'discount',)
+        fields = ('customer_id', 'date', 'value', 'discount','items')
 
 
-class SoldItemSerializer(serializers.ModelSerializer):
-    saleRecord = SaleRecordSerializer(many=False)
-    modelSupp = ModelSuppSerializer(many=False)
-
-    class Meta:
-        model = SoldItem
-        fields = ('saleRecord', 'modelSupp',)
 
 

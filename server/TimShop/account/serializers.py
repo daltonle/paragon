@@ -88,11 +88,14 @@ class UserSerializer(serializers.ModelSerializer):
         instance.last_name = validated_data.get(' last_name', instance. last_name)
         profile_data = validated_data.pop('profile')
         profile = instance.profile
-        profile.address = profile_data.get('address',profile.address)
-        profile.phoneNum = profile_data.get('phoneNum',profile.phoneNum)
+        profile.address = profile_data.get('address', profile.address)
+        profile.phoneNum = profile_data.get('phoneNum', profile.phoneNum)
+        profile.isBackstaff = profile_data.get('isBackstaff', profile.isBackstaff)
+        profile.isFrontstaff = profile_data.get('isFrontstaff', profile.isFrontstaff)
         profile.save()
         instance.save()
         return instance
+
 
 
 

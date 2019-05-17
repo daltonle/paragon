@@ -1,5 +1,5 @@
 from django.db import models
-from productModel.choices import STATUS_CHOICES
+from .choices import STATUS_CHOICES
 from django.utils.translation import gettext as _
 
 # Create your models here.
@@ -10,7 +10,7 @@ class Supplier(models.Model):
     creditLine = models.CharField(max_length=10)
     hasCreditLine = models.BooleanField(default=False, null=False)
     balance = models.DecimalField(null=False, max_digits=6, decimal_places=2)
-    deliveNotesr = models.CharField(max_length=255)
+    deliveryNotes = models.CharField(max_length=255)
     contactPerson = models.CharField(max_length=255)
 
     def __str__(self):
@@ -31,22 +31,9 @@ class PModel(models.Model):
     def __str__(self):
         return self.name
 
-
-class ModelSupp(models.Model):
-    class Meta:
-        unique_together = (('supplier', 'pModel'),)
-
-    supplier = models.ForeignKey(Supplier,related_name="supplier", on_delete=models.CASCADE)
-    pModel = models.ForeignKey(PModel,related_name='pModel', on_delete=models.CASCADE)
-    price = models.FloatField()
-    availability = models.IntegerField()
-
-    def __str__(self):
-        return '%s: %s' % (self.pModel.name, self.supplier.name)
-
 class OrderHistory(models.Model):
     id = models.AutoField(primary_key=True)
-    supplierId = models.ForeignKey(Supplier, related_name='supploer_id', on_delete=models.CASCADE,null=False)
+    supplierId = models.ForeignKey(Supplier, related_name='supplierId', on_delete=models.CASCADE,null=False)
     time = models.DateTimeField(null=False)
     value = models.DecimalField(null=False, max_digits=6, decimal_places=2)
     items = models.CharField(max_length=255, null=False)
@@ -54,8 +41,12 @@ class OrderHistory(models.Model):
     def __str__(self):
         return self.id
 
+
 class SupplierCatalogue(models.Model):
     id = models.AutoField(primary_key=True)
-    supplierId = models.ForeignKey(Supplier, related_name='supplier_id', on_delete=models.CASCADE, null=False)
-    itemId = models.ForeignKey(PModel, related_name='item_id', on_delete=models.CASCADE, null=False)
+    supplier = models.ForeignKey(Supplier, related_name='supplier', on_delete=models.CASCADE, null=False)
+    item = models.ForeignKey(PModel, related_name='item', on_delete=models.CASCADE, null=False)
     price = models.DecimalField(null=False, max_digits=6, decimal_places=2)
+
+    def __str__(self):
+        return '%s: %s' % (self.pModel.name, self.supplier.name)

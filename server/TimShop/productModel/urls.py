@@ -5,13 +5,15 @@ from rest_framework import routers
 from .views import (
     PModelViewSet,
     SupplierViewSet,
-    ModelSuppViewSet,
+    SupplierCatalogueViewSet,
+    OrderHistoryViewSet
 )
 
 router = routers.DefaultRouter()
-router.register('ModelSupp', ModelSuppViewSet)
+router.register('SupplierCatalogue', SupplierCatalogueViewSet)
 router.register('Supplier', SupplierViewSet)
 router.register('Model', PModelViewSet)
+router.register('OrderHistory', OrderHistoryViewSet)
 urlpatterns = [
     path('', include(router.urls)),
 

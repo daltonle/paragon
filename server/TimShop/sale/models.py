@@ -1,5 +1,5 @@
 from django.db import models
-
+from productModel.models import PModel
 # Create your models here.
 
 
@@ -15,9 +15,10 @@ class SaleRecord(models.Model):
         return '%s: %d' % (self.date, self.total)
 
 
-class SoldItem(models.Model):
-    saleRecord = models.ForeignKey(SaleRecord,related_name='saleRecord', on_delete=models.CASCADE)
-    modelSupp = models.ForeignKey('productModel.ModelSupp', related_name='modelSupp', on_delete=models.CASCADE,)
-
-    def __str__(self):
-        return self.modelSupp
+# class SoldItem(models.Model):
+#     saleRecord = models.ForeignKey(SaleRecord,related_name='saleRecord', on_delete=models.CASCADE)
+#     items = models.CharField(max_length=255)
+#     # items = models.ManyToManyField(PModel, related_name='model', on_delete= models.CASCADE, null = False )
+#
+#     def __str__(self):
+#         return self.items
