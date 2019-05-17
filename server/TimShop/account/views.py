@@ -62,5 +62,14 @@ class UserViewSet(viewsets.ModelViewSet):
             permission_classes = [IsSuperUser]
         return [permission() for permission in permission_classes]
 
+class LogoutView(APIView):
+
+    def post(self,request,format=None):
+        #delete token of the user
+        
+        request.user.auth_token.delete()
+        return Response(status=HTTP_200_OK)
+
+
 
 
