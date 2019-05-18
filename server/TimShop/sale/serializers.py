@@ -10,7 +10,7 @@ class SaleRecordSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SaleRecord
-        fields = ('customer_id', 'date', 'value', 'discount','items')
+        fields = ('id','customer_id', 'date', 'value', 'discount','items')
 
 
 

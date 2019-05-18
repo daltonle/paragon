@@ -5,13 +5,13 @@ from .models import PModel, SupplierCatalogue,Supplier, Order
 class SupplierSerializer(serializers.ModelSerializer):
     class Meta:
         model = Supplier
-        fields = ('name', 'address','creditLine', 'hasCreditLine', 'balance', 'deliveryNotes', 'contactPerson')
+        fields = ('id','name', 'address','creditLine', 'hasCreditLine', 'balance', 'deliveryNotes', 'contactPerson')
 
 
 class PModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = PModel
-        fields = ('name', 'type','subject', 'inStock', 'price', 'dateAcquired', 'location', 'description', 'availability')
+        fields = ('id','name', 'type','subject', 'inStock', 'price', 'dateAcquired', 'location', 'description', 'availability')
 
 
 class SupplierCatalogueSerializer(serializers.ModelSerializer):
@@ -20,7 +20,7 @@ class SupplierCatalogueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SupplierCatalogue
-        fields = ('supplier_id', 'pModel_id', 'price', )
+        fields = ('id','supplier_id', 'pModel_id', 'price', )
 
 
 class OrderSerializer(serializers.ModelSerializer):
