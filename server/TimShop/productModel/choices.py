@@ -1,9 +1,15 @@
 from django.utils.translation import gettext as _
 
-STATUS_CHOICES = (
-        (1, _("Not relevant")),
-        (2, _("Review")),
-        (3, _("Maybe relevant")),
-        (4, _("Relevant")),
-        (5, _("Leading candidate"))
+MODEL_CHOICES = (
+        ("Train", _("Train")),
+        ("Car", _("Car")),
+        ("Boat", _("Boat")),
+        ("Aircraft", _("Aircraft")),
+        ("Others", _("Others"))
+    )
+
+SUBJECT_CHOICES = (
+        ("Static", _("Static")),
+        ("Working", _("Working")),
+        ("Display", _("Display")),
     )

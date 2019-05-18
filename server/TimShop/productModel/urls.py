@@ -13,7 +13,7 @@ router = routers.DefaultRouter()
 router.register('SupplierCatalogue', SupplierCatalogueViewSet)
 router.register('Supplier', SupplierViewSet)
 router.register('Model', PModelViewSet)
-router.register('OrderHistory', OrderHistoryViewSet)
+router.register('Order', OrderHistoryViewSet)
 urlpatterns = [
     path('', include(router.urls)),
 

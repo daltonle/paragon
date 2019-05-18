@@ -15,8 +15,8 @@ router.register('users', UserViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('register/', RegisterView.as_view(), name='register'),
-    path('login/',UserLoginAPIView.as_view(),name='login'),
-    path('token-auth/', obtain_jwt_token, name='create-token'),
+    # path('login/',UserLoginAPIView.as_view(),name='login'),
+    path('login/', obtain_jwt_token, name='login'),
     # path('token-refresh',refresh_jwt_token, name='refresh-token'),
     path('logout/', LogoutView.as_view(), name='logout'),
 

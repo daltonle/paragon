@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import PModel, Supplier, SupplierCatalogue, OrderHistory
-from .serializers import PModelSerializer, SupplierSerializer, SupplierCatalogueSerializer, OrderHistorySerializer
+from .models import PModel, Supplier, SupplierCatalogue, Order
+from .serializers import PModelSerializer, SupplierSerializer, SupplierCatalogueSerializer, OrderSerializer
 from locations.models import Location
 from rest_framework.response import Response
 from rest_framework import status
@@ -52,9 +52,10 @@ class SupplierCatalogueViewSet(viewsets.ModelViewSet):
             permission_classes = [IsSuperUser]
         return [permission() for permission in permission_classes]
 
+
 class OrderHistoryViewSet(viewsets.ModelViewSet):
-    queryset = OrderHistory.objects.all()
-    serializer_class = OrderHistorySerializer
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
 
     def get_permissions(self):
         permission_classes = []

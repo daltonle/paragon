@@ -1,5 +1,5 @@
 from django.db import models
-from .choices import STATUS_CHOICES
+from .choices import SUBJECT_CHOICES, MODEL_CHOICES
 from django.utils.translation import gettext as _
 
 # Create your models here.
@@ -19,19 +19,19 @@ class Supplier(models.Model):
 class PModel(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255,null=False)
-    type = models.IntegerField(choices=STATUS_CHOICES, default=1)
-    subject = models.IntegerField(choices=STATUS_CHOICES, default=1)
+    type = models.CharField(max_length= 255, choices=MODEL_CHOICES, default=1)
+    subject = models.CharField(max_length= 255,choices=SUBJECT_CHOICES, default=1)
     inStock = models.IntegerField(null=False)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     dateAcquired = models.DateField(auto_now_add=True, null=False, blank=False)
     location = models.ForeignKey("locations.Location", null=True,on_delete=models.SET_NULL)
     description = models.CharField(max_length=500, null=True)
-    availabilty = models.BooleanField(null=False, default=False)
+    availability = models.BooleanField(null=False, default=False)
 
     def __str__(self):
         return self.name
 
-class OrderHistory(models.Model):
+class Order(models.Model):
     id = models.AutoField(primary_key=True)
     supplierId = models.ForeignKey(Supplier, related_name='supplierId', on_delete=models.CASCADE,null=False)
     time = models.DateTimeField(null=False)

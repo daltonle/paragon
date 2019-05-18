@@ -6,8 +6,17 @@ from enum import Enum
 
 # Create your models here.
 
+class Subject(models.Model):
+    name = models.CharField(max_length=255, choices=SUBJECT_CHOICES)
 
+    def __str__(self):
+        return self.name
 
+class Type(models.Model):
+    name = models.CharField(max_length=255, choices=MODEL_CHOICES)
+
+    def __str__(self):
+        return self.name
 
 
 class Customer(models.Model):
@@ -24,12 +33,10 @@ class Customer(models.Model):
     subjectInterests = models.CharField(max_length=255, choices=SUBJECT_CHOICES)
     modelTypeInterests = models.CharField(max_length=255, choices=MODEL_CHOICES)
 
+    # subject = models.ManyToManyField(Subject, related_name="subjectArea")
+    # type = models.ManyToManyField(Type, related_name="modelType")
     def __str__(self):
         return '%s: %s' % (self.name, self.email)
 
-class subject(models.Model):
-    pass
 
-class type(models.Model):
-    pass
 

@@ -6,11 +6,12 @@ from productModel.serializers import  PModelSerializer
 from productModel.models import  PModel
 
 class SaleRecordSerializer(serializers.ModelSerializer):
-    customer_id = serializers.PrimaryKeyRelatedField(queryset=Customer.objects.all(), source='customer_id')
+    customer_id = serializers.PrimaryKeyRelatedField(queryset=Customer.objects.all())
 
     class Meta:
         model = SaleRecord
         fields = ('customer_id', 'date', 'value', 'discount','items')
+
 
 
 

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import PModel, SupplierCatalogue,Supplier
+from .models import PModel, SupplierCatalogue,Supplier, Order
 
 
 class SupplierSerializer(serializers.ModelSerializer):
@@ -20,16 +20,16 @@ class SupplierCatalogueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SupplierCatalogue
-        fields = ('supplier_id', 'pModel_id', 'price', 'availability')
+        fields = ('supplier_id', 'pModel_id', 'price', )
 
 
-class OrderHistorySerializer(serializers.ModelSerializer):
-    supplierId = serializers.PrimaryKeyRelatedField(queryset=Supplier.objects.all(), source='supplierId')
+class OrderSerializer(serializers.ModelSerializer):
+    supplierId = serializers.PrimaryKeyRelatedField(queryset=Supplier.objects.all())
 
     class Meta:
-        model = PModel
+        model = Order
         fields = ('id', 'time', 'value', 'items', 'supplierId',)
-        read_only_fields = ('id')
+        read_only_fields = ('id',)
 
 
 
