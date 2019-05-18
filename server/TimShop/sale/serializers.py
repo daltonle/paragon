@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import SaleRecord, SoldItem
+from .models import SaleRecord
 from customers.serializers import CustomerSerializer
 from customers.models import Customer
 from productModel.serializers import  PModelSerializer

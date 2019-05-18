@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import SaleRecord, SoldItem
-from .serializers import SaleRecordSerializer, SoldItemSerializer
+from .models import SaleRecord
+from .serializers import SaleRecordSerializer
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -25,15 +25,15 @@ class SaleRecordViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
 
 
-class SoldItemViewSet(viewsets.ModelViewSet):
-    queryset = SoldItem.objects.all()
-    serializer_class = SoldItemSerializer
-
-    def get_permissions(self):
-        permission_classes = []
-        if self.action == 'create' or self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update':
-            permission_classes = [IsAuthenticated, IsAdminUser]
-        elif self.action == 'list' or self.action == 'destroy':
-            permission_classes = [IsSuperUser]
-        return [permission() for permission in permission_classes]
+# class SoldItemViewSet(viewsets.ModelViewSet):
+#     queryset = SoldItem.objects.all()
+#     serializer_class = SoldItemSerializer
+#
+#     def get_permissions(self):
+#         permission_classes = []
+#         if self.action == 'create' or self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update':
+#             permission_classes = [IsAuthenticated, IsAdminUser]
+#         elif self.action == 'list' or self.action == 'destroy':
+#             permission_classes = [IsSuperUser]
+#         return [permission() for permission in permission_classes]
 
