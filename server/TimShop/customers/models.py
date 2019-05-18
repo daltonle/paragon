@@ -1,20 +1,14 @@
 from django.db import models
 from django.utils.translation import gettext as _
+from .choices import MODEL_CHOICES, SUBJECT_CHOICES
 from enum import Enum
 
 
 # Create your models here.
 
-class SubjectAreaChoice(Enum):   # A subclass of Enum
-    S = "Static"
-    W = "working"
-    D = "display"
 
-class TypeChoice(Enum):
-    Car = "car"
-    Boat = "boat"
-    Air = "aircraft"
-    Other = "others"
+
+
 
 class Customer(models.Model):
     id = models.AutoField(primary_key=True)
@@ -27,10 +21,15 @@ class Customer(models.Model):
     balance = models.DecimalField(max_digits=6, decimal_places=2, default=0, null=False, blank=False)
     isMember = models.BooleanField(null=False, blank=False, default=False)
     joinDate = models.DateTimeField()
-    subjectInterests = models.CharField(max_length=5, choices=[(tag, tag.value) for tag in SubjectAreaChoice])
-    modelTypeInterests = models.CharField(max_length=5, choices=[(tag, tag.value) for tag in TypeChoice])
+    subjectInterests = models.CharField(max_length=255, choices=SUBJECT_CHOICES)
+    modelTypeInterests = models.CharField(max_length=255, choices=MODEL_CHOICES)
 
     def __str__(self):
         return '%s: %s' % (self.name, self.email)
 
+class subject(models.Model):
+    pass
+
+class type(models.Model):
+    pass
 
