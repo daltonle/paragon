@@ -28,7 +28,7 @@ class Customer(models.Model):
     isMember = models.BooleanField(null=False, blank=False, default=False)
     joinDate = models.DateTimeField()
     subjectInterests = models.CharField(max_length=5, choices=[(tag, tag.value) for tag in SubjectAreaChoice])
-    modelTypeInterests = models.CharField(max_length=5, choices=[(tag,tag.value) for tag in TypeChoice])
+    modelTypeInterests = models.CharField(max_length=5, choices=[(tag, tag.value) for tag in TypeChoice])
 
     def __str__(self):
         return '%s: %s' % (self.name, self.email)
