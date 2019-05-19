@@ -19,8 +19,8 @@ class Supplier(models.Model):
 class PModel(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255,null=False)
-    type = models.CharField(max_length= 255, choices=MODEL_CHOICES, default=1)
-    subject = models.CharField(max_length= 255,choices=SUBJECT_CHOICES, default=1)
+    type = models.CharField(max_length= 255, choices=MODEL_CHOICES, default=6)
+    subject = models.CharField(max_length= 255,choices=SUBJECT_CHOICES, default=4)
     inStock = models.IntegerField(null=False)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     dateAcquired = models.DateField(auto_now_add=True, null=False, blank=False)

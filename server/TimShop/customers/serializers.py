@@ -3,7 +3,7 @@ from rest_framework import serializers
 
 
 class SubjectSerializer(serializers.ModelSerializer):
-    
+
     class Meta:
         model = Subject
         fields = ('name',)
@@ -19,8 +19,8 @@ class TypeSerializer(serializers.ModelSerializer):
 
 
 class CustomerSerializer(serializers.ModelSerializer):
-    subject = SubjectSerializer(many=True, source="customerS")
-    type = TypeSerializer(many=True, source="customerT")
+    subject = SubjectSerializer(many=True, required=False)
+    type = TypeSerializer(many=True, required=False)
 
     class Meta:
         model = Customer
@@ -33,22 +33,22 @@ class CustomerSerializer(serializers.ModelSerializer):
                   'balance',
                   'isMember',
                   'joinDate',
-                  'subjectInterests',
-                  'modelTypeInterests',
                   'subject',
-                  'type'
+                  'type',
                   )
 
+    # override create for nested serializer
     def create(self, validated_data):
-        subject_data = validated_data.pop('subject')
-        type_data = validated_data.pop('type')
+        subject_data = validated_data.pop('subject')#pop subject data
+        type_data = validated_data.pop('type')#pop type data
         customer_obj = Customer.objects.create(**validated_data)
-        for subject in subject_data:
-            Subject.objects.create(**subject,customer = customer_obj)
-        for type in type_data:
-            Type.objects.create(**type, customer = customer_obj)
+        for s in subject_data:
+            Subject.objects.create(**s,customer = customer_obj)
+        for t in type_data:
+            Type.objects.create(**t, customer = customer_obj)
         return customer_obj
 
+    #override update for nested serializer
     def update(self, instance, validated_data):
         subject_data = validated_data.pop('subject')
         type_data = validated_data.pop('type')
@@ -63,7 +63,7 @@ class CustomerSerializer(serializers.ModelSerializer):
         instance.save()
         keep_type =[]
         existingType_ids = [t.id for t in instance.type]
-        for type in type:
+        for type in type_data:
             if "id" in type_data.key():
                 if Type.objects.filter(id=type["id"]).exist():
                     t = Type.objects.get(id=type["id"])
