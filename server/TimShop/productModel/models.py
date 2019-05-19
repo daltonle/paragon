@@ -1,36 +1,52 @@
 from django.db import models
+from .choices import SUBJECT_CHOICES, MODEL_CHOICES
+from django.utils.translation import gettext as _
 
 # Create your models here.
 class Supplier(models.Model):
-    name = models.CharField(max_length=255)
-    address = models.CharField(max_length=255)
-    deliver = models.CharField(max_length=255)
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255, null=False, blank=False)
+    address = models.CharField(max_length=255, null=False, blank=False)
+    creditLine = models.CharField(max_length=10)
+    hasCreditLine = models.BooleanField(default=False, null=False)
+    balance = models.DecimalField(null=False, max_digits=6, decimal_places=2)
+    deliveryNotes = models.CharField(max_length=255)
     contactPerson = models.CharField(max_length=255)
-    creditLine = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
 
 class PModel(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255,null=False)
-    type = models.CharField(max_length=255,null=False)
-    subjectArea = models.CharField(max_length=255, null=False)
-    quantity = models.IntegerField()
+    type = models.CharField(max_length= 255, choices=MODEL_CHOICES, default=1)
+    subject = models.CharField(max_length= 255,choices=SUBJECT_CHOICES, default=1)
+    inStock = models.IntegerField(null=False)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    dateAcquired = models.DateField(auto_now_add=True, null=False, blank=False)
     location = models.ForeignKey("locations.Location", null=True,on_delete=models.SET_NULL)
     description = models.CharField(max_length=500, null=True)
+    availability = models.BooleanField(null=False, default=False)
 
     def __str__(self):
         return self.name
 
+class Order(models.Model):
+    id = models.AutoField(primary_key=True)
+    supplierId = models.ForeignKey(Supplier, related_name='supplierId', on_delete=models.CASCADE,null=False)
+    time = models.DateTimeField(null=False)
+    value = models.DecimalField(null=False, max_digits=6, decimal_places=2)
+    items = models.CharField(max_length=255, null=False)
 
-class ModelSupp(models.Model):
-    class Meta:
-        unique_together = (('supplier', 'pModel'),)
+    def __str__(self):
+        return self.id
 
-    supplier = models.ForeignKey(Supplier,related_name="supplier", on_delete=models.CASCADE)
-    pModel = models.ForeignKey(PModel,related_name='pModel', on_delete=models.CASCADE)
-    price = models.FloatField()
-    availability = models.IntegerField()
+
+class SupplierCatalogue(models.Model):
+    id = models.AutoField(primary_key=True)
+    supplier = models.ForeignKey(Supplier, related_name='supplier', on_delete=models.CASCADE, null=False)
+    item = models.ForeignKey(PModel, related_name='item', on_delete=models.CASCADE, null=False)
+    price = models.DecimalField(null=False, max_digits=6, decimal_places=2)
 
     def __str__(self):
         return '%s: %s' % (self.pModel.name, self.supplier.name)

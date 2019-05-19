@@ -4,12 +4,12 @@ from rest_framework import routers
 
 from .views import (
     SaleRecordViewSet,
-    SoldItemViewSet,
+    # SoldItemViewSet,
 )
 
 router = routers.DefaultRouter()
 router.register('SaleRecord', SaleRecordViewSet)
-router.register('SoldItem', SoldItemViewSet)
+# router.register('SoldItem', SoldItemViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

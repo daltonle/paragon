@@ -15,6 +15,15 @@ class Profile(models.Model):
     isFrontstaff = models.BooleanField(default=False)
     isBackstaff= models.BooleanField(default=False)
 
+# store token of logged out user
+class BlackListedToken(models.Model):
+    token = models.CharField(max_length=500)
+    user = models.ForeignKey(User, related_name="token_user", on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ("token", "user")
+
 
 
 
