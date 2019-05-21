@@ -25,6 +25,8 @@ SECRET_KEY = '7gvr@#@fqraa^^4-pftlbmw$7vism0zj59f4w7#lv*%my$*crs'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+DATETIME_FORMAT = '%d-%m-%Y %H:%M:%S'
+
 ALLOWED_HOSTS = []
 
 

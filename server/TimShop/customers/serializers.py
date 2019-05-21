@@ -9,7 +9,6 @@ class SubjectSerializer(serializers.ModelSerializer):
         fields = ('name',)
 
 
-
 class TypeSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -52,6 +51,7 @@ class CustomerSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         subject_data = validated_data.pop('subject')
         type_data = validated_data.pop('type')
+        # set new value for customer if validated else keep the same
         instance.name = validated_data.get("title", instance.name)
         instance.email = validated_data.get("email", instance.email)
         instance.address = validated_data.get("title", instance.address)
@@ -61,47 +61,33 @@ class CustomerSerializer(serializers.ModelSerializer):
         instance.isMember = validated_data.get("title", instance.isMember)
         instance.joinDate = validated_data.get("title", instance.joinDate)
         instance.save()
+
+        keep_subject = [] #keep name of subject that customer have
+        # check if customer already has the subject or not
+        for subject in subject_data:
+            if Subject.objects.filter(name=subject["name"], customer = instance).exists():
+                    keep_subject.append(s.name)
+            else:
+                s = Subject.objects.create(**subject, customer=instance)
+                keep_subject.append(s.name)
+
+        # delete subject interest that is not in array of keep subject
+        for subject in instance.subject.all():
+            if subject.name not in keep_subject:
+                subject.delete()
+
+        # same pattern could be turned into a function maybe?
         keep_type =[]
-        existingType_ids = [t.id for t in instance.type]
         for type in type_data:
-            if "id" in type_data.key():
-                if Type.objects.filter(id=type["id"]).exist():
-                    t = Type.objects.get(id=type["id"])
-                    t.name = type.get('name',t.name)
-                    t.save
-                    keep_type.append(t.id)
-                else:
-                    continue
+            if Type.objects.filter(name=type["name"], customer = instance).exists():
+                   keep_type.append(t.name)
             else:
                 t = Type.objects.create(**type, customer = instance)
-                keep_type.append(t.id)
+                keep_type.append(t.name)
 
-        for type in instance.type:
-            if type.id not in keep_type:
+        for type in instance.type.all():
+            if type.name not in keep_type:
                 type.delete()
-        for type in type_data:
-            Type.objects.create(**type, customer = instance)
-
-
-
-        keep_subject=[]
-        existingSubject_ids = [s.id for s in instance.subject]
-        for subject in subject_data:
-            if "id" in subject_data.key():
-                if Subject.objects.filter(id=subject["id"]).exist():
-                    s =Subject.objects.get(id=subject["id"])
-                    s.name = subject.get('name',s.name)
-                    s.save
-                    keep_subject.append(s.id)
-                else:
-                    continue
-            else:
-                s = Subject.objects.create(**subject, customer = instance)
-                keep_subject.append(s.id)
-
-        for subject in instance.subject:
-            if subject.id not in keep_subject:
-                subject.delete()
 
         return instance
 
