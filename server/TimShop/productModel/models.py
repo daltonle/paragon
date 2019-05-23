@@ -7,7 +7,7 @@ class Supplier(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, null=False, blank=False)
     address = models.CharField(max_length=255, null=False, blank=False)
-    creditLine = models.CharField(max_length=10)
+    creditLine = models.CharField(max_length=10, null=True, blank=True)
     hasCreditLine = models.BooleanField(default=False, null=False)
     balance = models.DecimalField(null=False, max_digits=6, decimal_places=2)
     deliveryNotes = models.CharField(max_length=255)
