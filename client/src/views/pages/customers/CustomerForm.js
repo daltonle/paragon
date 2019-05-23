@@ -59,9 +59,6 @@ class CustomerForm extends Component {
           if (!values.phone) {
             errors.phone = 'Required'
           }
-          if (!values.balance) {
-            errors.balance = 'Required'
-          }
           if (values.hasCreditLine && !values.creditLine) {
             errors.creditLine = 'Required'
           }
@@ -90,7 +87,7 @@ class CustomerForm extends Component {
                 <h1>Add customer record</h1>
                 <div className={styles.buttonGroup}>
                   <GhostButton name="Cancel" className={styles.button} onClick={onCancel} />
-                  <ButtonNormal name="Save" className={styles.button} type="submit"/>
+                  <ButtonNormal name="Save" className={styles.button} type="submit" isSubmitting={isSubmitting} />
                 </div>
               </div>
               <div className={styles.form}>

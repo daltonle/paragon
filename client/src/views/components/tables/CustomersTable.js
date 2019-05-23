@@ -24,7 +24,7 @@ class CustomersTable extends Component {
       {
         Header: "Name",
         accessor: "name",
-        style: {'white-space': 'unset'},
+        style: {'whiteSpace': 'unset'},
         width: 120,
       },
       {
@@ -35,7 +35,7 @@ class CustomersTable extends Component {
       {
         Header: "Address",
         accessor: "address",
-        style: {'white-space': 'unset'}
+        style: {'whiteSpace': 'unset'}
       },
       {
         Header: "Phone",
@@ -131,7 +131,7 @@ class CustomersTable extends Component {
       {
         Header: "Subjects",
         accessor: "subject",
-        style: {'white-space': 'unset'},
+        style: {'whiteSpace': 'unset'},
         width: 120,
         Cell: ({ value }) => {
           let output = ""
@@ -146,7 +146,7 @@ class CustomersTable extends Component {
       {
         Header: "Types",
         accessor: "type",
-        style: {'white-space': 'unset'},
+        style: {'whiteSpace': 'unset'},
         width: 120,
         Cell: ({ value }) => {
           let output = ""

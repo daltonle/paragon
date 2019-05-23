@@ -20,7 +20,7 @@ export const getCustomers = () => dispatch => {
   .catch(err => console.log(err))
 }
 
-export const addCustomer = (customer, resolve, reject) => dispatch => {
+export const addCustomer = (customer) => dispatch => {
   const { name, email, address, phone, hasCreditLine, creditLine, subjectInterests, modelTypeInterests, isMember} = customer
   const data = {
     name,
@@ -51,10 +51,6 @@ export const addCustomer = (customer, resolve, reject) => dispatch => {
       type: ADD_CUSTOMER,
       payload: res
     })
-    resolve()
   })
-  .catch(err => {
-    console.log(err)
-    reject("Something went wrong.")
-  })
+  .catch(err => console.log(err))
 }
