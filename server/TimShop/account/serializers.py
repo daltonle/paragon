@@ -97,6 +97,7 @@ class UserSerializer(serializers.ModelSerializer):
             profile.location = profile_data.get('location', profile.location)
             profile.save()
         else:
+
             Profile.objects.create(owner = instance, **profile_data)
         instance.save()
         return instance
