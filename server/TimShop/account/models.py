@@ -17,6 +17,7 @@ class Profile(models.Model):
     address = models.CharField(max_length=255,null=True, blank=True)
     phoneNum = models.IntegerField(null=True, blank=True)
     group = models.CharField(max_length=1, choices=GROUP_CHOICES, default="Staff")
+    location = models.ForeignKey("locations.Location", null=True,on_delete=models.SET_NULL)
     
 # store token of logged out user
 class BlackListedToken(models.Model):

@@ -216,7 +216,8 @@
     "created_date": "2019-05-23T00:00:00Z",
     "address": "86 Laurel Road",
     "phoneNum": "0684323385",
-    "group": "Staff"
+    "group": "Staff",
+    "location": 1
   }
 }, {
   "model": "account.profile",
@@ -226,7 +227,8 @@
     "created_date": "2019-05-23T00:00:00Z",
     "address": "37 Michigan Crossing",
     "phoneNum": "0516016330",
-    "group": "Staff"
+    "group": "Staff",
+    "location": 1
   }
 }, {
   "model": "account.profile",
@@ -236,7 +238,8 @@
     "created_date": "2019-05-23T00:00:00Z",
     "address": "314 Mayer Crossing",
     "phoneNum": "0666127906",
-    "group": "Staff"
+    "group": "Staff",
+    "location": 1
   }
 }, {
   "model": "account.profile",
@@ -246,7 +249,8 @@
     "created_date": "2019-05-23T00:00:00Z",
     "address": "822 Fremont Plaza",
     "phoneNum": "0338708910",
-    "group": "Staff"
+    "group": "Staff",
+    "location": 1
   }
 }, {
   "model": "account.profile",
@@ -256,7 +260,8 @@
     "created_date": "2019-05-23T00:00:00Z",
     "address": "6 Elka Parkway",
     "phoneNum": "0963438761",
-    "group": "Staff"
+    "group": "Staff",
+    "location": 1
   }
 }, {
   "model": "account.profile",
@@ -266,7 +271,8 @@
     "created_date": "2019-05-23T00:00:00Z",
     "address": "01 Clove Circle",
     "phoneNum": "0314360502",
-    "group": "Staff"
+    "group": "Staff",
+    "location": 1
   }
 }, {
   "model": "account.profile",
@@ -276,7 +282,8 @@
     "created_date": "2019-05-23T00:00:00Z",
     "address": "4 Maple Crossing",
     "phoneNum": "0049539959",
-    "group": "Staff"
+    "group": "Staff",
+    "location": 2
   }
 }, {
   "model": "account.profile",
@@ -286,7 +293,8 @@
     "created_date": "2019-05-23T00:00:00Z",
     "address": "16 Waxwing Road",
     "phoneNum": "0162970854",
-    "group": "Staff"
+    "group": "Staff",
+    "location": 2
   }
 }, {
   "model": "account.profile",
@@ -296,7 +304,8 @@
     "created_date": "2019-05-23T00:00:00Z",
     "address": "23 5th Circle",
     "phoneNum": "0366952315",
-    "group": "Staff"
+    "group": "Staff",
+    "location": 2
   }
 }, {
   "model": "account.profile",
@@ -306,6 +315,7 @@
     "created_date": "2019-05-23T00:00:00Z",
     "address": "68 Nevada Road",
     "phoneNum": "0479715445",
-    "group": "Staff"
+    "group": "Staff",
+    "location": 2
   }
 }]
