@@ -14,7 +14,7 @@ class Customer(models.Model):
     email = models.EmailField(max_length=255)
     address = models.CharField(max_length=255)
     phone = models.CharField(_('Phone'), max_length=11, null=False, blank=False)
-    creditLine = models.CharField(_('credit line'), max_length=10)
+    creditLine = models.CharField(_('credit line'), max_length=10, null=True, blank=True)
     hasCreditLine = models.BooleanField(null=False, blank=False, default=False)
     balance = models.DecimalField(max_digits=6, decimal_places=2, default=0, null=False, blank=False)
     isMember = models.BooleanField(null=False, blank=False, default=False)

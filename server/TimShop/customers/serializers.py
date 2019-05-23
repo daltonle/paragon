@@ -28,6 +28,7 @@ class CustomerSerializer(serializers.ModelSerializer):
                   'email',
                   'address',
                   'phone',
+                  'hasCreditLine',
                   'creditLine',
                   'balance',
                   'isMember',
@@ -56,6 +57,7 @@ class CustomerSerializer(serializers.ModelSerializer):
         instance.email = validated_data.get("email", instance.email)
         instance.address = validated_data.get("address", instance.address)
         instance.phone = validated_data.get("phone", instance.phone)
+        instance.hasCreditLine = validated_data.get("hasCreditLine", instance.creditLine)
         instance.creditLine = validated_data.get("creditLine", instance.creditLine)
         instance.balance = validated_data.get("balance", instance.balance)
         instance.isMember = validated_data.get("isMember", instance.isMember)
