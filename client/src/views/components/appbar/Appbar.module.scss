@@ -29,6 +29,10 @@
   border-left: 5px solid transparent;
   text-decoration: none;
   cursor: pointer;
+
+  &:hover {
+    color: $text-white;
+  }
 }
 
 .menuActive { 

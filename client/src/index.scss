@@ -100,3 +100,11 @@ b {
 .hidden-sm {
   display: none;
 }
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
