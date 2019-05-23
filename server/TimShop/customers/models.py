@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext as _
-from .choices import MODEL_CHOICES, SUBJECT_CHOICES
+from productModel.choices import MODEL_CHOICES, SUBJECT_CHOICES
 from enum import Enum
 
 
@@ -18,9 +18,7 @@ class Customer(models.Model):
     hasCreditLine = models.BooleanField(null=False, blank=False, default=False)
     balance = models.DecimalField(max_digits=6, decimal_places=2, default=0, null=False, blank=False)
     isMember = models.BooleanField(null=False, blank=False, default=False)
-    joinDate = models.DateTimeField()
-    subjectInterests = models.CharField(max_length=255, choices=SUBJECT_CHOICES)
-    modelTypeInterests = models.CharField(max_length=255, choices=MODEL_CHOICES)
+    joinDate = models.DateTimeField(null=True, blank=False)
 
     def __str__(self):
         return '%s: %s' % (self.name, self.email)
@@ -28,8 +26,8 @@ class Customer(models.Model):
 
 class Subject(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=255, choices=SUBJECT_CHOICES)
-    customer = models.ManyToManyField(Customer, related_name="customerS")
+    name = models.CharField(max_length=255, choices=SUBJECT_CHOICES,blank=True,default="Other")
+    customer = models.ForeignKey(Customer, related_name="subject",on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -37,8 +35,8 @@ class Subject(models.Model):
 
 class Type(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=255, choices=MODEL_CHOICES)
-    customer = models.ManyToManyField(Customer, related_name="customerT")
+    name = models.CharField(max_length=255, choices=MODEL_CHOICES,blank=True,default="Other")
+    customer = models.ForeignKey(Customer, related_name="type", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
