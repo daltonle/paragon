@@ -35,8 +35,6 @@ export const addCustomer = (customer) => dispatch => {
     type: modelTypeInterests.map(t => ({ name: t.value }))
   }
 
-  console.log(JSON.stringify(data))
-
   fetch('http://localhost:8000/customer/', {
     method: 'POST',
     headers: {
