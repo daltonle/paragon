@@ -26,26 +26,36 @@ class SalesTable extends Component {
         width: 80
       },
       {
-        Header: "Customer name",
-        accessor: "customerName",
-        width: 160
-      },
-      {
         Header: "Value",
         accessor: "value",
-        width: 100
+        width: 100,
+        Cell: ({ value }) => (
+          <span>${value}</span>
+        )
       },
       {
         Header: "Discount",
         accessor: "discount",
         width: 100,
         Cell: ({ value }) => (
-          <span>{value} %</span>
+          <span>{value}%</span>
         )
       },
       {
         Header: "Items",
-        accessor: "items"
+        accessor: "items",
+        Cell: ({ value }) => {
+          const items = value.map((item, index) => (
+            <p key={index}>
+              {item.id}: {item.name} (quantity: {item.quantity})
+            </p>
+          ))
+          return (
+            <div>
+              {items}
+            </div>
+          )
+        }
       },
       { ...actionColumn }
     ]
