@@ -1,0 +1,65 @@
+[
+  {
+    "model": "productModel.supplier",
+    "pk": 1,
+    "fields": {
+      "name": "Arclytics",
+      "address": "33 Macquarie St., Sydney NSW 2000",
+      "creditLine": "12345887",
+      "hasCreditLine": true,
+      "balance": "135.00",
+      "deliveryNotes": "Only deliver in the morning",
+      "contactPerson": "Paul Sherman - 0423465728"
+    }
+  },
+  {
+    "model": "productModel.pmodel",
+    "pk": 1,
+    "fields": {
+      "name": "Ford Prelude 1964",
+      "type": "Static",
+      "subject": "Car",
+      "inStock": 35,
+      "price": "80.00",
+      "dateAcquired": "2019-05-23",
+      "location": 1,
+      "description": null,
+      "availability": true
+    }
+  },
+  {
+    "model": "productModel.pmodel",
+    "pk": 2,
+    "fields": {
+      "name": "Ford Mustang 2019",
+      "type": "Display",
+      "subject": "Car",
+      "inStock": 13,
+      "price": "120.00",
+      "dateAcquired": "2019-05-23",
+      "location": 2,
+      "description": null,
+      "availability": true
+    }
+  },
+  {
+    "model": "productModel.order",
+    "pk": 1,
+    "fields": {
+      "supplierId": 1,
+      "time": "2019-05-10T10:24:22Z",
+      "value": "1200.00",
+      "items": "{{\"name\":\"Ford Mustang 2019\", \"quantity\": 10}}"
+    }
+  },
+  {
+    "model": "productModel.suppliercatalogue",
+    "pk": 1,
+    "fields": { "supplier": 1, "item": 1, "price": "60.00" }
+  },
+  {
+    "model": "productModel.suppliercatalogue",
+    "pk": 2,
+    "fields": { "supplier": 1, "item": 2, "price": "90.00" }
+  }
+]

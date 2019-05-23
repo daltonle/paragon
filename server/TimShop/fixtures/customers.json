@@ -1,0 +1,32 @@
+[
+  {
+    "model": "customers.customer",
+    "pk": 1,
+    "fields": {
+      "name": "Arvy",
+      "email": "arvy@exxample.com",
+      "address": "23 Ws",
+      "phone": "0987654321",
+      "creditLine": "",
+      "hasCreditLine": false,
+      "balance": "0.00",
+      "isMember": false,
+      "joinDate": null
+    }
+  },
+  {
+    "model": "customers.subject",
+    "pk": 1,
+    "fields": { "name": "Car", "customer": 1 }
+  },
+  {
+    "model": "customers.type",
+    "pk": 1,
+    "fields": { "name": "Static", "customer": 1 }
+  },
+  {
+    "model": "customers.type",
+    "pk": 2,
+    "fields": { "name": "Working", "customer": 1 }
+  }
+]
