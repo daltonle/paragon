@@ -11,12 +11,13 @@ User = get_user_model()
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('address', 'phoneNum', 'group')
+        fields = ('address', 'phoneNum', 'group', 'location')
 
     def update(self, instance, validated_data):
         address = validated_data.get('address',instance.address)
         phoneNum = validated_data.get('phoneNum', instance.phoneNum)
         group = validated_data.get('group', instance.group)
+        location = validated_data.get('location', instance.location)
         instance.save()
         return instance
 
@@ -93,6 +94,7 @@ class UserSerializer(serializers.ModelSerializer):
             profile.address = profile_data.get('address', profile.address)
             profile.phoneNum = profile_data.get('phoneNum', profile.phoneNum)
             profile.group = profile_data.get('group', profile.group)
+            profile.location = profile_data.get('location', profile.location)
             profile.save()
         else:
             Profile.objects.create(owner = instance, **profile_data)
