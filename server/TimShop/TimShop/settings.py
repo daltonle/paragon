@@ -46,11 +46,12 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'customers',
     'locations',
-
+    'corsheaders'
 
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -63,7 +64,8 @@ MIDDLEWARE = [
 CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = (
-    'http//:localhost:8000',
+    'localhost:3000',
+    'http://localhost:3000'
 )
 
 ROOT_URLCONF = 'TimShop.urls'
