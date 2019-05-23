@@ -1,0 +1,13 @@
+[
+  {
+    "model": "sale.salerecord",
+    "pk": 1,
+    "fields": {
+      "customerId": 1,
+      "date": "2019-05-23T12:03:43.434Z",
+      "value": 96.0,
+      "discount": 20.0,
+      "items": "[{\"id\": 2, \"name\":\"Ford Mustang 2019\", \"quantity\": 1}]"
+    }
+  }
+]
