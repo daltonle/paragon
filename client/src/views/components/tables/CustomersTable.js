@@ -18,7 +18,7 @@ class CustomersTable extends Component {
       {
         Header: "ID",
         accessor: "id",
-        width: 64
+        width: 40
       },
       {
         Header: "Name",
@@ -26,21 +26,27 @@ class CustomersTable extends Component {
       },
       {
         Header: "Address",
-        accessor: "address"
+        accessor: "address",
+        width: 220
       },
       {
         Header: "Phone",
         accessor: "phone",
-        width: 140
+        width: 100
       },
       {
         Header: "Credit line",
-        accessor: "creditLine"
+        Cell: props => {
+          if (props.original.hasCreditLine)
+            return <span>{props.original.creditLine}</span>
+          else return <span>N/A</span>
+        }
       },
       {
         Header: "Balance",
         accessor: "balance",
-        width: 100
+        width: 80,
+        Cell: ({ value }) => <span>${value}</span>
       },
       {
         Header: "Member",
@@ -75,12 +81,38 @@ class CustomersTable extends Component {
       },
       {
         Header: "Join date",
-        accessor: "joinDate",
-        width: 120
+        width: 120,
+        Cell: props => {
+          if (props.original.isMember)
+            return <span>{props.original.joinDate}</span>
+          else return <span>N/A</span>
+        }
       },
       {
-        Header: "Interests",
-        accessor: "interests"
+        Header: "Subjects",
+        accessor: "subject",
+        Cell: ({ value }) => {
+          let output = ""
+          value.map((s, index) => {
+            if (index > 0)
+              output += ", "
+            output += s.name
+          })
+          return <span>{output}</span>
+        }
+      },
+      {
+        Header: "Types",
+        accessor: "type",
+        Cell: ({ value }) => {
+          let output = ""
+          value.map((t, index) => {
+            if (index > 0)
+              output += ", "
+            output += t.name
+          })
+          return <span>{output}</span>
+        }
       },
       { ...actionColumn }
     ]
