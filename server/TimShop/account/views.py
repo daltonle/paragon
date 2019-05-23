@@ -29,12 +29,16 @@ from .permissions import IsLoggedInUserOrAdmin, IsSuperUser
 # Create your views here.
 User = get_user_model()
 
+def jwt_response_payload_handler(token, user=None, request=None):
+    return {
+        'token': token,
+        'user': UserSerializer(user).data
+    }
 
 class RegisterView(CreateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
     permission_classes = [AllowAny,]
-
 
 class UserLoginAPIView(APIView):
     permission_classes = [AllowAny,]
@@ -44,6 +48,7 @@ class UserLoginAPIView(APIView):
         serializer = UserLoginSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             new_data = serializer.data
+            print(new_data)
             return Response(new_data,status=HTTP_200_OK)
         return Response(serializer.errors,status=HTTP_400_BAD_REQUEST)
 
