@@ -15,21 +15,24 @@ class CustomerForm extends Component {
   render() {
     const { onCancel } = this.props
     const subjectOptions = [
-      { value: "aircraft", label: "Aircrafts"},
-      { value: "car", label: "Cars" },
-      { value: "train", label: "Trains" },
-      { value: "boat", label: "Boats" }
+      { value: "Aircraft", label: "Aircraft"},
+      { value: "Car", label: "Car" },
+      { value: "Train", label: "Train" },
+      { value: "Boat", label: "Boat" },
+      { value: "Other", label: "Other" }
     ]
     const modelTypeOptions = [
-      { value: 'static', label: 'Static' },
-      { value: "working", label: "Working" },
-      { value: "display", label: "Display" }
+      { value: 'Static', label: 'Static' },
+      { value: "Working", label: "Working" },
+      { value: "Display", label: "Display" },
+      { value: "Other", label: "Other" }
     ]
 
     return (
       <Formik
         initialValues={{ 
           name: '',
+          email: '',
           address: '',
           phone: '',
           creditLine: '',
@@ -43,9 +46,29 @@ class CustomerForm extends Component {
           if (!values.name) {
             errors.name = 'Required'
           }
+          if (!values.email) {
+            errors.email = 'Required'
+          } else if (
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+          ) {
+            errors.email = 'Invalid email address'
+          }
+          if (!values.address) {
+            errors.address = 'Required'
+          }
+          if (!values.phone) {
+            errors.phone = 'Required'
+          }
+          if (!values.balance) {
+            errors.balance = 'Required'
+          }
+          if (values.hasCreditLine && !values.creditLine) {
+            errors.creditLine = 'Required'
+          }
           return errors
         }}
         onSubmit={(values, { setSubmitting, setStatus }) => {
+          setSubmitting(true)
           this.props.addCustomer(values)
           setSubmitting(false)
           this.props.onFinish()
@@ -74,7 +97,7 @@ class CustomerForm extends Component {
                 <label>
                   <span>Name</span>
                   <input
-                    type="name"
+                    type="text"
                     name="name"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -84,6 +107,19 @@ class CustomerForm extends Component {
                   />
                 </label>
                 <h6 className={styles.errors}>{errors.name && touched.name && errors.name}</h6>
+                <label>
+                  <span>Email</span>
+                  <input
+                    type="email"
+                    name="email"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                    placeholder="Email"
+                    className={styles.textField}
+                  />
+                </label>
+                <h6 className={styles.errors}>{errors.email && touched.email && errors.email}</h6>
                 <label>
                   <span>Address</span>
                   <input
@@ -171,9 +207,9 @@ class CustomerForm extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) => ({
 
-}
+})
 
 const mapDispatchToProps = {
   addCustomer

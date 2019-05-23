@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ReactTable from 'react-table'
+import moment from 'moment'
 import { actionColumn } from './ActionColumn'
 
 import { getCustomers } from '../../../state/ducks/customers/actions'
@@ -22,12 +23,19 @@ class CustomersTable extends Component {
       },
       {
         Header: "Name",
-        accessor: "name"
+        accessor: "name",
+        style: {'white-space': 'unset'},
+        width: 120,
+      },
+      {
+        Header: "Email",
+        accessor: "email",
+        width: 160
       },
       {
         Header: "Address",
         accessor: "address",
-        width: 220
+        style: {'white-space': 'unset'}
       },
       {
         Header: "Phone",
@@ -36,6 +44,8 @@ class CustomersTable extends Component {
       },
       {
         Header: "Credit line",
+        accessor: "creditLine",
+        width: 100,
         Cell: props => {
           if (props.original.hasCreditLine)
             return <span>{props.original.creditLine}</span>
@@ -81,37 +91,71 @@ class CustomersTable extends Component {
       },
       {
         Header: "Join date",
+        accessor: "joinDate",
         width: 120,
-        Cell: props => {
-          if (props.original.isMember)
-            return <span>{props.original.joinDate}</span>
+        Cell: ({ value }) => {
+          if (value)
+            return <span>{moment(value).format("DD-MM-YYYY")}</span>
           else return <span>N/A</span>
-        }
+        },
+        filterMethod: (filter, row) => {
+          if (filter.value === "all") {
+            return true
+          }
+          else if (filter.value === "week") {
+            return moment(row[filter.id]).isAfter(moment().subtract(1, 'w'))
+          }
+          else if (filter.value === "month") {
+            return moment(row[filter.id]).isAfter(moment().subtract(1, 'M'))
+          }
+          else if (filter.value === "6month") {
+            return moment(row[filter.id]).isAfter(moment().subtract(6, 'M'))
+          }
+          else if (filter.value === "year") {
+            return moment(row[filter.id]).isAfter(moment().subtract(1, 'y'))
+          }
+        },
+        Filter: ({ filter, onChange }) =>
+          <select
+            onChange={event => onChange(event.target.value)}
+            style={{ width: "100%" }}
+            value={filter ? filter.value : "all"}
+          >
+            <option value="all">Show all</option>
+            <option value="week">This week</option>
+            <option value="month">This month</option>
+            <option value="6month">Last 6 months</option>
+            <option value="year">This year</option>
+          </select>
       },
       {
         Header: "Subjects",
         accessor: "subject",
+        style: {'white-space': 'unset'},
+        width: 120,
         Cell: ({ value }) => {
           let output = ""
-          value.map((s, index) => {
+          value.forEach((s, index) => {
             if (index > 0)
               output += ", "
             output += s.name
           })
-          return <span>{output}</span>
+          return <span>{output === "" ? "None" : output}</span>
         }
       },
       {
         Header: "Types",
         accessor: "type",
+        style: {'white-space': 'unset'},
+        width: 120,
         Cell: ({ value }) => {
           let output = ""
-          value.map((t, index) => {
+          value.forEach((t, index) => {
             if (index > 0)
               output += ", "
             output += t.name
           })
-          return <span>{output}</span>
+          return <span>{output === "" ? "None" : output}</span>
         }
       },
       { ...actionColumn }
