@@ -1,7 +1,8 @@
 import moment from 'moment'
 import {
   GET_CUSTOMERS,
-  ADD_CUSTOMER
+  ADD_CUSTOMER,
+  DELETE_CUSTOMER
 } from "./types"
 
 export const getCustomers = () => dispatch => {
@@ -50,5 +51,20 @@ export const addCustomer = (customer) => dispatch => {
       payload: res
     })
   })
+  .catch(err => console.log(err))
+}
+
+export const deleteCustomer = (id) => dispatch => {
+  fetch(`http://localhost:8000/customer/${id}`, {
+    method: 'DELETE',
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `JWT ${localStorage.getItem("ParagonToken")}`
+    }
+  })
+  .then(() => dispatch({
+    type: DELETE_CUSTOMER,
+    payload: id
+  }))
   .catch(err => console.log(err))
 }

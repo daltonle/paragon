@@ -1,6 +1,7 @@
 import { 
   GET_CUSTOMERS,
-  UPDATE_CUSTOMER
+  ADD_CUSTOMER,
+  DELETE_CUSTOMER
 } from "./types"
 
 const initialState = { }
@@ -12,10 +13,17 @@ const reducer = (state = initialState, action) => {
         ...state,
         data: action.payload
       }
-    case UPDATE_CUSTOMER:
+    case ADD_CUSTOMER:
       return {
         ...state,
         data: [...state.data, action.payload]
+      }
+    case DELETE_CUSTOMER:
+      let newData = [...state.data]
+      newData.splice(newData.findIndex(d => d.id === action.payload), 1)
+      return {
+        ...state,
+        data: newData
       }
     default:
       return state

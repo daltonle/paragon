@@ -15,6 +15,19 @@ export const ButtonNormal = (props) => {
   )
 }
 
+export const ButtonNormalDanger = (props) => {
+  const { name, className, isSubmitting, onClick, type } = props
+  return (
+    <button className={`${styles.buttonNormalDanger} ${className}`} onClick={onClick} type={type}>
+      {
+        isSubmitting ? 
+        <div className={`${styles.preloader} animateInfiniteRotate`}></div> :
+        name
+      }
+    </button>
+  )
+}
+
 export const GhostButton = (props) => {
   const { name, className, isSubmitting, onClick } = props
   return (

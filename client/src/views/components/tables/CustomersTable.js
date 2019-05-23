@@ -1,16 +1,45 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ReactTable from 'react-table'
+import Modal from 'react-bootstrap/Modal'
 import moment from 'moment'
+import { ButtonNormalDanger, GhostButton } from '../buttons/Buttons'
 import { actionColumn } from './ActionColumn'
 
-import { getCustomers } from '../../../state/ducks/customers/actions'
+import { getCustomers, deleteCustomer } from '../../../state/ducks/customers/actions'
 
 import 'react-table/react-table.css'
 
 class CustomersTable extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showDeleteConfirm: false,
+      deletedCustomer: {}
+    }
+  }
+
   componentDidMount = () => {
     this.props.getCustomers()
+  }
+
+  handleShowDeleteConfirm = (row) => {
+    this.setState({ 
+      showDeleteConfirm: true, 
+      deletedCustomer: {
+        id: row.id,
+        name: row.name
+      }
+    })
+  }
+
+  handleCloseDeleteConfirm = () => {
+    this.setState({ showDeleteConfirm: false, deletedCustomer: {} })
+  }
+
+  handleDelete = () => {
+    this.props.deleteCustomer(this.state.deletedCustomer.id)
+    this.handleCloseDeleteConfirm()
   }
 
   render() {
@@ -158,7 +187,14 @@ class CustomersTable extends Component {
           return <span>{output === "" ? "None" : output}</span>
         }
       },
-      { ...actionColumn }
+      {
+        Header: "Actions",
+        Cell: (props) => {
+          return actionColumn(props, this.handleShowDeleteConfirm)
+        },
+        filterable: false,
+        width: 172
+      }
     ]
 
     return (
@@ -173,6 +209,18 @@ class CustomersTable extends Component {
           defaultFilterMethod={(filter, row) =>
             String(row[filter.id]).includes(filter.value)}
         />
+        <Modal show={this.state.showDeleteConfirm} onHide={this.handleCloseDeleteConfirm}>
+          <Modal.Header closeButton>
+            <Modal.Title>Deleting customer record</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Are you sure you want to delete this customer?<br/><br/><strong>{this.state.deletedCustomer.name}</strong>
+          </Modal.Body>
+          <Modal.Footer>
+            <GhostButton name="Cancel" onClick={this.handleCloseDeleteConfirm} />
+            <ButtonNormalDanger name="Delete" onClick={this.handleDelete} />
+          </Modal.Footer>
+        </Modal>
       </div>
     )
   }
@@ -183,7 +231,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  getCustomers
+  getCustomers,
+  deleteCustomer
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomersTable)

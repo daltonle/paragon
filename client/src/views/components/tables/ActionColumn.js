@@ -6,20 +6,18 @@ import styles from './ActionColumn.module.scss'
 
 // action column to be added to ReactTable, including Edit and Delete buttons
 
-export const actionColumn = {
-  Header: "Actions",
-  Cell: () => (
-    <div className={styles.container}>
-      <div className={styles.button}>
-        <EditIcon className={styles.icon} />
-        <span>Edit</span>
-      </div>
-      <div className={styles.button}>
-        <DeleteIcon className={styles.icon} />
-        <span>Delete</span>
-      </div>
+export const actionColumn = (props, showDeleteModal) => (
+  <div className={styles.container}>
+    <div className={styles.button}>
+      <EditIcon className={styles.icon} />
+      <span>Edit</span>
     </div>
-  ),
-  filterable: false,
-  width: 172
-}
+    <div 
+      className={styles.button}
+      onClick={() => showDeleteModal(props.original)}
+    >
+      <DeleteIcon className={styles.icon} />
+      <span>Delete</span>
+    </div>
+  </div>
+)

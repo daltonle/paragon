@@ -57,7 +57,14 @@ class SalesTable extends Component {
           )
         }
       },
-      { ...actionColumn }
+      {
+        Header: "Actions",
+        Cell: (props) => {
+          return actionColumn(props)
+        },
+        filterable: false,
+        width: 172
+      }
     ]
 
     return (
