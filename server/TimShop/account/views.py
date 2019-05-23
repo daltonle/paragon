@@ -62,7 +62,7 @@ class UserViewSet(viewsets.ModelViewSet):
         if self.action == 'create':
             permission_classes = [IsSuperUser]
         elif self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update':
-             permission_classes = [IsLoggedInUserOrAdmin,IsSuperUser]
+            permission_classes = [IsLoggedInUserOrAdmin]
         elif self.action == 'list' or self.action == 'destroy':
             permission_classes = [IsSuperUser]
         return [permission() for permission in permission_classes]

@@ -59,7 +59,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields =  ['id','username', 'password', 'repassword', 'first_name', 'last_name', 'email', 'profile',]
+        fields = ['id','username', 'password', 'repassword', 'first_name', 'last_name', 'email', 'profile',]
 
     def validate_password(self, value):
         data = self.get_initial()
@@ -88,11 +88,14 @@ class UserSerializer(serializers.ModelSerializer):
         instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.last_name = validated_data.get(' last_name', instance. last_name)
         profile_data = validated_data.pop('profile')
-        profile = instance.profile
-        profile.address = profile_data.get('address', profile.address)
-        profile.phoneNum = profile_data.get('phoneNum', profile.phoneNum)
-        profile.group = profile_data.get('group', profile.group) 
-        profile.save()
+        if instance.profile is not None:
+            profile = instance.profile
+            profile.address = profile_data.get('address', profile.address)
+            profile.phoneNum = profile_data.get('phoneNum', profile.phoneNum)
+            profile.group = profile_data.get('group', profile.group)
+            profile.save()
+        else:
+            Profile.objects.create(owner = instance, **profile_data)
         instance.save()
         return instance
 
