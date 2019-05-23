@@ -2,7 +2,9 @@
 @import '../../../styles/font.scss';
 
 .buttonNormal {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   outline: none;
   border: none;
   box-sizing: content-box;
@@ -40,7 +42,7 @@
 
 .preloader {
   background-color: transparent;
-  border: 2px solid rgba($color: $black, $alpha: .8);
+  border: 2px solid rgba($color: $text-white, $alpha: .8);
   border-left-color: transparent;
   border-radius: 50%;
   width: 1.25rem;

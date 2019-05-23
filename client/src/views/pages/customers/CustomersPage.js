@@ -17,7 +17,7 @@ export default class CustomersPage extends Component {
   }
 
   componentDidMount = () => {
-    if (sessionStorage.getItem("loggedIn") !== "true")
+    if (!localStorage.getItem("ParagonToken"))
       this.props.history.push('/login')
   }
 

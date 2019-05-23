@@ -44,7 +44,7 @@ export const Appbar = (props) => (
       Catalogue
     </div>
     <div className={styles.logout} onClick={() => {
-      sessionStorage.removeItem('loggedIn')
+      localStorage.removeItem('ParagonToken')
       props.history.push('/login')
     }}>
       Log out

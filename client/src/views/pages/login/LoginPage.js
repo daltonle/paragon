@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Formik } from 'formik'
+import { ButtonNormal } from '../../components/buttons/Buttons'
 import { login } from '../../../utils/AuthenticationHelper'
+import { setUser } from '../../../state/ducks/user/actions'
 
 import styles from './LoginPage.module.scss'
 
 class LoginPage extends Component {
   componentDidMount = () => {
-    if (sessionStorage.getItem("loggedIn") === "true")
+    if (localStorage.getItem("ParagonToken"))
       this.props.history.push('/')
   }
 
@@ -30,13 +32,20 @@ class LoginPage extends Component {
               return errors
             }}
             onSubmit={(values, { setSubmitting, setStatus }) => {
-              if (login(values)) {
+              setSubmitting(true)
+              const promise = new Promise((resolve, reject) => {
+                login(values, resolve, reject)
+              })
+              promise.then(data => {
+                localStorage.setItem("ParagonToken", data.token)
+                this.props.setUser(data.user)
+                setSubmitting(false)
                 this.props.history.push('/')
-              }
-              else {
-                setStatus({message: "Wrong username or password."})
-              }
-              setSubmitting(false)
+              })
+              .catch(err => {
+                setStatus({ message: err })
+                setSubmitting(false)
+              })
             }}
           >
             {({
@@ -73,9 +82,7 @@ class LoginPage extends Component {
                   <h6 className={styles.errors}>{errors.password && touched.password && errors.password}</h6>
                   <h6 className={styles.errors}>{status && status.message && status.message}</h6>
                 </div>
-                <button type="submit" disabled={isSubmitting} className={styles.button}>
-                  LOG IN
-                </button>
+                <ButtonNormal type="submit" name="LOG IN" isSubmitting={isSubmitting} className={styles.button} />
               </form>
             )}
           </Formik>
@@ -90,7 +97,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  
+  setUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
