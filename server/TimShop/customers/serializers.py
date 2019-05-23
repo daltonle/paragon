@@ -52,14 +52,14 @@ class CustomerSerializer(serializers.ModelSerializer):
         subject_data = validated_data.pop('subject')
         type_data = validated_data.pop('type')
         # set new value for customer if validated else keep the same
-        instance.name = validated_data.get("title", instance.name)
+        instance.name = validated_data.get("name", instance.name)
         instance.email = validated_data.get("email", instance.email)
-        instance.address = validated_data.get("title", instance.address)
-        instance.phone = validated_data.get("title", instance.phone)
-        instance.creditLine = validated_data.get("title", instance.creditLine)
-        instance.balance = validated_data.get("title", instance.balance)
-        instance.isMember = validated_data.get("title", instance.isMember)
-        instance.joinDate = validated_data.get("title", instance.joinDate)
+        instance.address = validated_data.get("address", instance.address)
+        instance.phone = validated_data.get("phone", instance.phone)
+        instance.creditLine = validated_data.get("creditLine", instance.creditLine)
+        instance.balance = validated_data.get("balance", instance.balance)
+        instance.isMember = validated_data.get("isMember", instance.isMember)
+        instance.joinDate = validated_data.get("joinDate", instance.joinDate)
         instance.save()
 
         keep_subject = [] #keep name of subject that customer have

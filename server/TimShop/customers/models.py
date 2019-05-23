@@ -19,7 +19,6 @@ class Customer(models.Model):
     balance = models.DecimalField(max_digits=6, decimal_places=2, default=0, null=False, blank=False)
     isMember = models.BooleanField(null=False, blank=False, default=False)
     joinDate = models.DateTimeField(null=True, blank=False)
-    createdDate = models.DateTimeField(null=True, blank=False)
 
     def __str__(self):
         return '%s: %s' % (self.name, self.email)
