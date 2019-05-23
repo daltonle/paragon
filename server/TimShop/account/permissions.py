@@ -4,8 +4,8 @@ from .models import BlackListedToken
 class IsLoggedInUserOrAdmin(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
-
-        return obj.owner == request.user or request.user.is_superuser
+        
+        return obj.id == request.user or request.user.is_superuser
 
 
 class IsSuperUser(permissions.BasePermission):

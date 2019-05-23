@@ -155,5 +155,9 @@ JWT_AUTH = {
     # allow refreshing of tokens
     'JWT_ALLOW_REFRESH': False,
 
+    #different returb payload
+    'JWT_RESPONSE_PAYLOAD_HANDLER':
+    #'rest_framework_jwt.utils.jwt_response_payload_handler',
+    'account.views.jwt_response_payload_handler',
 
 }
