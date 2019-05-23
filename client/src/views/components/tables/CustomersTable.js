@@ -54,7 +54,7 @@ class CustomersTable extends Component {
         Header: "Name",
         accessor: "name",
         style: {'whiteSpace': 'unset'},
-        width: 120,
+        width: 100,
       },
       {
         Header: "Email",
@@ -121,7 +121,7 @@ class CustomersTable extends Component {
       {
         Header: "Join date",
         accessor: "joinDate",
-        width: 120,
+        width: 100,
         Cell: ({ value }) => {
           if (value)
             return <span>{moment(value).format("DD-MM-YYYY")}</span>
@@ -161,7 +161,7 @@ class CustomersTable extends Component {
         Header: "Subjects",
         accessor: "subject",
         style: {'whiteSpace': 'unset'},
-        width: 120,
+        width: 100,
         Cell: ({ value }) => {
           let output = ""
           value.forEach((s, index) => {
@@ -176,7 +176,7 @@ class CustomersTable extends Component {
         Header: "Types",
         accessor: "type",
         style: {'whiteSpace': 'unset'},
-        width: 120,
+        width: 100,
         Cell: ({ value }) => {
           let output = ""
           value.forEach((t, index) => {
