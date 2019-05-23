@@ -66,7 +66,7 @@ class CustomerSerializer(serializers.ModelSerializer):
         # check if customer already has the subject or not
         for subject in subject_data:
             if Subject.objects.filter(name=subject["name"], customer = instance).exists():
-                    keep_subject.append(s.name)
+                    keep_subject.append(subject["name"])
             else:
                 s = Subject.objects.create(**subject, customer=instance)
                 keep_subject.append(s.name)
@@ -80,7 +80,7 @@ class CustomerSerializer(serializers.ModelSerializer):
         keep_type =[]
         for type in type_data:
             if Type.objects.filter(name=type["name"], customer = instance).exists():
-                   keep_type.append(t.name)
+                   keep_type.append(type["name"])
             else:
                 t = Type.objects.create(**type, customer = instance)
                 keep_type.append(t.name)
