@@ -23,7 +23,7 @@ class PModel(models.Model):
     subject = models.CharField(max_length= 255,choices=SUBJECT_CHOICES, default=4)
     inStock = models.IntegerField(null=False)
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    dateAcquired = models.DateField(auto_now_add=True, null=False, blank=False)
+    dateAcquired = models.DateField(null=False, blank=False)
     location = models.ForeignKey("locations.Location", null=True,on_delete=models.SET_NULL)
     description = models.CharField(max_length=500, null=True)
     availability = models.BooleanField(null=False, default=False)
