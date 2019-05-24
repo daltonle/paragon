@@ -5,17 +5,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   outline: none;
   border: none;
   box-sizing: content-box;
   background-color: $teal/* #60AAA1 4CA095*/;
-  color: $text-white;
+  height: calc(3rem - 1.5rem);
   width: 8rem;
   padding: .75rem .75rem;
-  text-align: center;
   border-radius: 5px;
   box-shadow: 0.1875rem 0.1875rem 0.375rem rgba(0, 0, 0, .3);
   cursor: pointer;
+  
+  span {
+    color: $text-white;
+  }
 
   &:hover {
     background: $light-teal;
@@ -46,12 +50,18 @@
   @extend .buttonNormal;
   background-color: transparent;
   border: 2px solid $teal;
-  color: $teal;
   box-shadow: none;
+
+  span {
+    color: $teal;
+  }
 
   &:hover {
     background: $teal;
-    color: $text-white;
+    
+    span {
+      color: $text-white;
+    }
   }
 }
 

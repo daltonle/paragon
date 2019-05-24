@@ -12,8 +12,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 20rem;
-  width: 24rem;
+  width: 28rem;
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
   border-top: 5px solid $teal;
   padding: 2.5rem 2.5rem 2.5rem 2.5rem;
@@ -33,12 +32,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-top: 1em;
 }
 
 .textField {
-  width: calc(100% - 2rem);
+  width: calc(100%);
   background: #fff;
-  color: #a3a3a3;
+  color: #202124;
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
   border: 0;
   outline: 0;

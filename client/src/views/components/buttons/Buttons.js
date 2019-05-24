@@ -9,7 +9,7 @@ export const ButtonNormal = (props) => {
       {
         isSubmitting ? 
         <div className={`${styles.preloader} animateInfiniteRotate`}></div> :
-        name
+        <span>{name}</span>
       }
     </button>
   )
@@ -22,7 +22,7 @@ export const ButtonNormalDanger = (props) => {
       {
         isSubmitting ? 
         <div className={`${styles.preloader} animateInfiniteRotate`}></div> :
-        name
+        <span>{name}</span>
       }
     </button>
   )
@@ -35,7 +35,7 @@ export const GhostButton = (props) => {
       {
         isSubmitting ? 
         <div className={`${styles.preloader} animateInfiniteRotate`}></div> :
-        name
+        <span>{name}</span>
       }
     </button>
   )
