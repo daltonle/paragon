@@ -36,6 +36,7 @@ class CustomersPage extends Component {
         <CustomerForm 
           onCancel={() => this.setState({ adding: false })}  
           onFinish={() => this.setState({ adding: false })}
+          action="Add"
           initial={{ 
             name: '',
             email: '',
@@ -56,6 +57,7 @@ class CustomersPage extends Component {
         <CustomerForm
           onCancel={() => this.setState({ updating: false, updatedCustomer: {} })}
           onFinish={() => this.setState({ updating: false, updatedCustomer: {} })}
+          action="Edit"
           initial={{
             id,
             name,

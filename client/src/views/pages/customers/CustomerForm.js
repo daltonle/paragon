@@ -55,7 +55,6 @@ class CustomerForm extends Component {
         }}
         onSubmit={(values, { setSubmitting, setStatus }) => {
           setSubmitting(true)
-          console.log(values)
           this.props.onSubmit(values)
           setSubmitting(false)
           this.props.onFinish()
@@ -74,7 +73,7 @@ class CustomerForm extends Component {
           }) => (
             <form onSubmit={handleSubmit} className={headerStyles.content}>
               <div className={headerStyles.header}>
-                <h1>Add customer record</h1>
+                <h1>{this.props.action} customer record</h1>
                 <div className={styles.buttonGroup}>
                   <GhostButton name="Cancel" className={styles.button} onClick={onCancel} />
                   <ButtonNormal name="Save" className={styles.button} type="submit" isSubmitting={isSubmitting} />
