@@ -88,7 +88,7 @@ class ModelTable extends Component {
         accessor: "location",
         width: 100,
         Cell: ({ value }) => {
-          if (this.props.locations)
+          if (this.props.locations && this.props.locations.length !== 0)
             return <span>{this.props.locations[this.props.locations.findIndex(l => l.id === value)].city}</span>
           return <span>Not found</span>
         }

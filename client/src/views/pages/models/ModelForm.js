@@ -61,7 +61,6 @@ class ModelForm extends Component {
         }}
         onSubmit={(values, { setSubmitting, setStatus }) => {
           setSubmitting(true)
-          console.log(values)
           this.props.onSubmit(values)
           setSubmitting(false)
           this.props.onFinish()

@@ -28,7 +28,7 @@ export const addModel = (model) => dispatch => {
     name,
     inStock,
     price,
-    dateAcquired: moment(dateAcquired).format(),
+    dateAcquired: moment(dateAcquired).format("YYYY-MM-DD"),
     location: location.value,
     subject: subject.value,
     type: type.value,
@@ -75,16 +75,15 @@ export const updateModel = (model) => dispatch => {
     name,
     inStock,
     price: parseFloat(price),
-    dateAcquired: moment(dateAcquired).format(),
+    dateAcquired: moment(dateAcquired).format("YYYY-MM-DD"),
     location: location.value,
     subject: subject.value,
     type: type.value,
     description,
     availability
   }
-  console.log(data)
 
-  fetch(`http://localhost:8000/productModel/Model/${model.id}`, {
+  fetch(`http://localhost:8000/productModel/Model/${model.id}/`, {
     method: 'PUT',
     headers: {
       "Content-Type": "application/json",
