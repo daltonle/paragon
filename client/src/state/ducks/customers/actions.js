@@ -2,7 +2,8 @@ import moment from 'moment'
 import {
   GET_CUSTOMERS,
   ADD_CUSTOMER,
-  DELETE_CUSTOMER
+  DELETE_CUSTOMER,
+  UPDATE_CUSTOMER
 } from "./types"
 
 export const getCustomers = () => dispatch => {
@@ -55,7 +56,7 @@ export const addCustomer = (customer) => dispatch => {
 }
 
 export const deleteCustomer = (id) => dispatch => {
-  fetch(`http://localhost:8000/customer/${id}`, {
+  fetch(`http://localhost:8000/customer/${id}/`, {
     method: 'DELETE',
     headers: {
       "Content-Type": "application/json",
@@ -65,6 +66,36 @@ export const deleteCustomer = (id) => dispatch => {
   .then(() => dispatch({
     type: DELETE_CUSTOMER,
     payload: id
+  }))
+  .catch(err => console.log(err))
+}
+
+export const updateCustomer = (customer) => dispatch => {
+  const { name, email, address, phone, hasCreditLine, creditLine, subjectInterests, modelTypeInterests, isMember} = customer
+  const data = {
+    name,
+    email,
+    address,
+    phone,
+    hasCreditLine,
+    creditLine: hasCreditLine ? creditLine : "",
+    isMember,
+    joinDate: isMember ? moment().format() : null,
+    subject: subjectInterests.map(s => ({ name: s.value })),
+    type: modelTypeInterests.map(t => ({ name: t.value }))
+  }
+
+  fetch(`http://localhost:8000/customer/${customer.id}/`, {
+    method: 'PUT',
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `JWT ${localStorage.getItem("ParagonToken")}`
+    },
+    body: JSON.stringify(data)
+  })
+  .then(res => dispatch({
+    type: UPDATE_CUSTOMER,
+    payload: res
   }))
   .catch(err => console.log(err))
 }

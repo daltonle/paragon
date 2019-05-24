@@ -4,7 +4,6 @@ import { Formik } from 'formik'
 import Toggle from 'react-toggle'
 import Select from 'react-select'
 import { ButtonNormal, GhostButton } from '../../components/buttons/Buttons'
-import { addCustomer } from '../../../state/ducks/customers/actions'
 
 import "react-toggle/style.css"
 
@@ -30,17 +29,7 @@ class CustomerForm extends Component {
 
     return (
       <Formik
-        initialValues={{ 
-          name: '',
-          email: '',
-          address: '',
-          phone: '',
-          creditLine: '',
-          hasCreditLine: false,
-          isMember: false,
-          subjectInterests: [],
-          modelTypeInterests: []
-        }}
+        initialValues={this.props.initial}
         validate={values => {
           let errors = {}
           if (!values.name) {
@@ -66,7 +55,8 @@ class CustomerForm extends Component {
         }}
         onSubmit={(values, { setSubmitting, setStatus }) => {
           setSubmitting(true)
-          this.props.addCustomer(values)
+          console.log(values)
+          this.props.onSubmit(values)
           setSubmitting(false)
           this.props.onFinish()
         }}
@@ -179,6 +169,7 @@ class CustomerForm extends Component {
                   <label>
                     <span>Subject interests</span>
                     <Select
+                      defaultValue={this.props.initial.subjectInterests}
                       className={styles.selectInput}
                       options={subjectOptions}
                       isMulti
@@ -188,6 +179,7 @@ class CustomerForm extends Component {
                   <label>
                     <span>Model type interests</span>
                     <Select
+                      defaultValue={this.props.initial.modelTypeInterests}
                       className={styles.selectInput}
                       options={modelTypeOptions}
                       isMulti
@@ -209,7 +201,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  addCustomer
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomerForm)

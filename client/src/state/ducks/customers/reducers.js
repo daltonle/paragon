@@ -1,7 +1,8 @@
 import { 
   GET_CUSTOMERS,
   ADD_CUSTOMER,
-  DELETE_CUSTOMER
+  DELETE_CUSTOMER,
+  UPDATE_CUSTOMER
 } from "./types"
 
 const initialState = { }
@@ -21,6 +22,13 @@ const reducer = (state = initialState, action) => {
     case DELETE_CUSTOMER:
       let newData = [...state.data]
       newData.splice(newData.findIndex(d => d.id === action.payload), 1)
+      return {
+        ...state,
+        data: newData
+      }
+    case UPDATE_CUSTOMER:
+      newData = [...state.data]
+      newData[newData.findIndex(d => d.id === action.payload.id)] = action.payload
       return {
         ...state,
         data: newData

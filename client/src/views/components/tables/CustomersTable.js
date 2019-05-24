@@ -190,7 +190,7 @@ class CustomersTable extends Component {
       {
         Header: "Actions",
         Cell: (props) => {
-          return actionColumn(props, this.handleShowDeleteConfirm)
+          return actionColumn(props, this.handleShowDeleteConfirm, this.props.onStartUpdate)
         },
         filterable: false,
         width: 172
