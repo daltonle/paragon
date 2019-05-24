@@ -44,6 +44,7 @@ class CustomersPage extends Component {
             phone: '',
             creditLine: '',
             hasCreditLine: false,
+            balance: 0,
             isMember: false,
             subjectInterests: [],
             modelTypeInterests: []
@@ -52,7 +53,7 @@ class CustomersPage extends Component {
         />
       )
     else if (this.state.updating) {
-      const { id, name, email, address, phone, hasCreditLine, creditLine, subject, type, isMember } = this.state.updatedCustomer
+      const { id, name, email, address, phone, hasCreditLine, creditLine, subject, type, isMember, balance } = this.state.updatedCustomer
       return (
         <CustomerForm
           onCancel={() => this.setState({ updating: false, updatedCustomer: {} })}
@@ -66,6 +67,7 @@ class CustomersPage extends Component {
             phone,
             hasCreditLine,
             creditLine,
+            balance,
             isMember,
             subjectInterests: subject.map(s => ({ value: s.name, label: s.name })),
             modelTypeInterests: type.map(t => ({ value: t.name, label: t.name }))

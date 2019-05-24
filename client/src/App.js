@@ -9,6 +9,7 @@ import SalesPage from "./views/pages/sales/SalesPage"
 import LoginPage from "./views/pages/login/LoginPage"
 import ModelPage from "./views/pages/models/ModelPage"
 import LocationPage from "./views/pages/locations/LocationPage"
+import SupplierPage from "./views/pages/suppliers/SupplierPage"
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
               <Route exact path={['/', '/sales']} render={props => <SalesPage {...props}/>} />
               <Route path='/models' render={props => <ModelPage {...props}/>} />
               <Route path='/locations' render={props => <LocationPage {...props} />} />
+              <Route path='/suppliers' render={props => <SupplierPage {...props} />} />
             </Switch>
           </div>
         </PersistGate>

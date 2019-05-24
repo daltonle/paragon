@@ -38,6 +38,13 @@ label > input {
   margin-top: .5rem;
 }
 
+label > textarea {
+  margin-top: .5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  resize: none;
+}
+
 .formButton {
   display: block;
   border: 0;
@@ -68,6 +75,7 @@ h6.errors {
   margin-top: 1rem;
   margin-bottom: 1rem;
   color: $red;
+  z-index: 0;
 }
 
 .creditLine {
@@ -75,37 +83,12 @@ h6.errors {
   flex-direction: row;
 
   .inputField {
-    flex-basis: 60%;
+    flex-basis: 45%;
     margin-right: 2.5rem;
   }
 
   .toggleButton {
     padding-top: 2rem;
-  }
-}
-
-.clubMember {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 1.5rem;
-
-  .toggle {
-    margin-left: 1rem;
-  }
-}
-
-.interests {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  label {
-    flex-basis: 45%;
-
-    .selectInput {
-      margin-top: .5rem;
-    }
   }
 }
 

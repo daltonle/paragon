@@ -23,7 +23,7 @@ export const getCustomers = () => dispatch => {
 }
 
 export const addCustomer = (customer) => dispatch => {
-  const { name, email, address, phone, hasCreditLine, creditLine, subjectInterests, modelTypeInterests, isMember} = customer
+  const { name, email, address, phone, hasCreditLine, creditLine, subjectInterests, modelTypeInterests, isMember, balance } = customer
   const data = {
     name,
     email,
@@ -31,6 +31,7 @@ export const addCustomer = (customer) => dispatch => {
     phone,
     hasCreditLine,
     creditLine: hasCreditLine ? creditLine : "",
+    balance,
     isMember,
     joinDate: isMember ? moment().format() : null,
     subject: subjectInterests.map(s => ({ name: s.value })),
@@ -71,7 +72,7 @@ export const deleteCustomer = (id) => dispatch => {
 }
 
 export const updateCustomer = (customer) => dispatch => {
-  const { name, email, address, phone, hasCreditLine, creditLine, subjectInterests, modelTypeInterests, isMember} = customer
+  const { name, email, address, phone, hasCreditLine, creditLine, subjectInterests, modelTypeInterests, isMember, balance } = customer
   const data = {
     name,
     email,
@@ -79,6 +80,7 @@ export const updateCustomer = (customer) => dispatch => {
     phone,
     hasCreditLine,
     creditLine: hasCreditLine ? creditLine : "",
+    balance,
     isMember,
     joinDate: isMember ? moment().format() : null,
     subject: subjectInterests.map(s => ({ name: s.value })),

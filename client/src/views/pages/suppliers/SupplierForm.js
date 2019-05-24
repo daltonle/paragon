@@ -7,50 +7,27 @@ import { ButtonNormal, GhostButton } from '../../components/buttons/Buttons'
 
 import "react-toggle/style.css"
 
-import headerStyles from './CustomersPage.module.scss'
-import styles from './CustomerForm.module.scss'
+import headerStyles from './SupplierPage.module.scss'
+import styles from './SupplierForm.module.scss'
 
-class CustomerForm extends Component {
+class SupplierForm extends Component {
   render() {
     const { onCancel } = this.props
-    const subjectOptions = [
-      { value: "Aircraft", label: "Aircraft"},
-      { value: "Car", label: "Car" },
-      { value: "Train", label: "Train" },
-      { value: "Boat", label: "Boat" },
-      { value: "Other", label: "Other" }
-    ]
-    const modelTypeOptions = [
-      { value: 'Static', label: 'Static' },
-      { value: "Working", label: "Working" },
-      { value: "Display", label: "Display" },
-      { value: "Other", label: "Other" }
-    ]
+    
 
     return (
       <Formik
         initialValues={this.props.initial}
         validate={values => {
           let errors = {}
-          if (!values.name) {
-            errors.name = 'Required'
-          }
-          if (!values.email) {
-            errors.email = 'Required'
-          } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-          ) {
-            errors.email = 'Invalid email address'
-          }
-          if (!values.address) {
-            errors.address = 'Required'
-          }
-          if (!values.phone) {
-            errors.phone = 'Required'
-          }
-          if (values.hasCreditLine && !values.creditLine) {
-            errors.creditLine = 'Required'
-          }
+          if (!values.name)
+            errors.name = "Required"
+          if (!values.address)
+            errors.address = "Required"
+          if (values.hasCreditLine && !values.creditLine)
+            errors.creditLine = "Required"
+          if (!values.balance)
+            errors.balance = "Required"
           else if (values.hasCreditLine.length > 10) {
             errors.creditLine = 'Invalid credit line'
           }
@@ -60,6 +37,8 @@ class CustomerForm extends Component {
             !/^[+|-]{0,1}[0-9]+\.*[0-9]*$/.test(values.balance)
           )
             errors.balance = "Invalid number"
+          if (!values.contactPerson)
+            errors.contactPerson = "Required"
           return errors
         }}
         onSubmit={(values, { setSubmitting, setStatus }) => {
@@ -87,7 +66,7 @@ class CustomerForm extends Component {
           }) => (
             <form onSubmit={handleSubmit} className={headerStyles.content}>
               <div className={headerStyles.header}>
-                <h1>{this.props.action} customer record</h1>
+                <h1>{this.props.action} supplier</h1>
                 <div className={styles.buttonGroup}>
                   <GhostButton name="Cancel" className={styles.button} onClick={onCancel} />
                   <ButtonNormal name="Save" className={styles.button} type="submit" isSubmitting={isSubmitting} />
@@ -108,19 +87,6 @@ class CustomerForm extends Component {
                 </label>
                 <h6 className={styles.errors}>{errors.name && touched.name && errors.name}</h6>
                 <label>
-                  <span>Email</span>
-                  <input
-                    type="email"
-                    name="email"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                    placeholder="Email"
-                    className={styles.textField}
-                  />
-                </label>
-                <h6 className={styles.errors}>{errors.email && touched.email && errors.email}</h6>
-                <label>
                   <span>Address</span>
                   <input
                     type="text"
@@ -133,19 +99,6 @@ class CustomerForm extends Component {
                   />
                 </label>
                 <h6 className={styles.errors}>{errors.address && touched.address && errors.address}</h6>
-                <label>
-                  <span>Phone number</span>
-                  <input
-                    type="text"
-                    name="phone"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.phone}
-                    placeholder="Phone number"
-                    className={styles.textField}
-                  />
-                </label>
-                <h6 className={styles.errors}>{errors.phone && touched.phone && errors.phone}</h6>
                 <div className={styles.creditLine}>
                   <label className={styles.inputField}>
                     <span>Credit line</span>
@@ -182,51 +135,33 @@ class CustomerForm extends Component {
                   />
                 </label>
                 <h6 className={styles.errors}>{errors.balance && touched.balance && errors.balance}</h6>
-                <label className={styles.clubMember}>
-                  <span>Club member</span>
-                  <Toggle
-                    name="isMember"
-                    checked={values.isMember}
+                <label>
+                  <span>Delivery notes</span>
+                  <textarea
+                    type="text"
+                    row={4}
+                    name="deliveryNotes"
                     onChange={handleChange}
-                    className={styles.toggle}
+                    onBlur={handleBlur}
+                    value={values.deliveryNotes}
+                    placeholder="Delivery notes"
+                    className={styles.textField}
                   />
                 </label>
-                <div className={styles.interests}>
-                  <label>
-                    <span>Subject interests</span>
-                    <Select
-                      defaultValue={this.props.initial.subjectInterests}
-                      className={styles.selectInput}
-                      options={subjectOptions}
-                      isMulti
-                      onChange={value => setFieldValue('subjectInterests', value)}
-                      theme={theme => ({
-                        ...theme,
-                        colors: {
-                          ...theme.colors,
-                          primary: '#389589'
-                        }
-                      })}
-                    />
-                  </label>
-                  <label>
-                    <span>Model type interests</span>
-                    <Select
-                      defaultValue={this.props.initial.modelTypeInterests}
-                      className={styles.selectInput}
-                      options={modelTypeOptions}
-                      isMulti
-                      onChange={value => setFieldValue('modelTypeInterests', value)}
-                      theme={theme => ({
-                        ...theme,
-                        colors: {
-                          ...theme.colors,
-                          primary: '#389589'
-                        }
-                      })}
-                    />
-                  </label>
-                </div>
+                <label>
+                  <span>Contact person</span>
+                  <textarea
+                    type="text"
+                    row={2}
+                    name="contactPerson"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.contactPerson}
+                    placeholder="Contact person"
+                    className={styles.textField}
+                  />
+                </label>
+                <h6 className={styles.errors}>{errors.contactPerson && touched.contactPerson && errors.contactPerson}</h6>
                 <h6 className={styles.errors}>{status && status.message && status.message}</h6>
               </div>
             </form>
@@ -243,4 +178,4 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CustomerForm)
+export default connect(mapStateToProps, mapDispatchToProps)(SupplierForm)

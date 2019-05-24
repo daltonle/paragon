@@ -25,9 +25,7 @@ class LocationTable extends Component {
   handleShowDeleteConfirm = (row) => {
     this.setState({ 
       showDeleteConfirm: true, 
-      deletedLocation: {
-        id: row.id
-      }
+      deletedLocation: row
     })
   }
 
@@ -92,10 +90,10 @@ class LocationTable extends Component {
         />
         <Modal show={this.state.showDeleteConfirm} onHide={this.handleCloseDeleteConfirm}>
           <Modal.Header closeButton>
-            <Modal.Title>Deleting model record</Modal.Title>
+            <Modal.Title>Deleting location</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            Are you sure you want to delete this model record?
+            Are you sure you want to delete this location?<br/><strong>{this.state.deletedLocation.street}, {this.state.deletedLocation.city} {this.state.deletedLocation.state} {this.state.deletedLocation.postcode}</strong>
           </Modal.Body>
           <Modal.Footer>
             <GhostButton name="Cancel" onClick={this.handleCloseDeleteConfirm} />
