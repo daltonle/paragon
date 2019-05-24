@@ -25,7 +25,7 @@ class PModel(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     dateAcquired = models.DateField(null=False, blank=False)
     location = models.ForeignKey("locations.Location", null=True,on_delete=models.SET_NULL)
-    description = models.CharField(max_length=500, null=True)
+    description = models.CharField(max_length=500, null=True, blank=True)
     availability = models.BooleanField(null=False, default=False)
 
     def __str__(self):
