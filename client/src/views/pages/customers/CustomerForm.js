@@ -173,6 +173,13 @@ class CustomerForm extends Component {
                       options={subjectOptions}
                       isMulti
                       onChange={value => setFieldValue('subjectInterests', value)}
+                      theme={theme => ({
+                        ...theme,
+                        colors: {
+                          ...theme.colors,
+                          primary: '#389589'
+                        }
+                      })}
                     />
                   </label>
                   <label>
@@ -183,6 +190,13 @@ class CustomerForm extends Component {
                       options={modelTypeOptions}
                       isMulti
                       onChange={value => setFieldValue('modelTypeInterests', value)}
+                      theme={theme => ({
+                        ...theme,
+                        colors: {
+                          ...theme.colors,
+                          primary: '#389589'
+                        }
+                      })}
                     />
                   </label>
                 </div>

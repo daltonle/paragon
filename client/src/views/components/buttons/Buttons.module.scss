@@ -34,7 +34,6 @@
 .buttonNormalDanger {
   @extend .buttonNormal;
   background-color: $red;
-  border: 2px solid $red;
   box-shadow: none;
 
   &:hover {
@@ -51,6 +50,7 @@
   background-color: transparent;
   border: 2px solid $teal;
   box-shadow: none;
+  height: calc(3rem - 1.5rem - 4px);
 
   span {
     color: $teal;

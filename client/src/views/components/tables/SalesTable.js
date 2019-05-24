@@ -1,15 +1,44 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ReactTable from 'react-table'
+import moment from 'moment'
+import Modal from 'react-bootstrap/Modal'
+import { ButtonNormalDanger, GhostButton } from '../buttons/Buttons'
 import { actionColumn } from './ActionColumn'
 
-import { getSales } from '../../../state/ducks/sales/actions'
+import { getSales, deleteSale } from '../../../state/ducks/sales/actions'
 
 import 'react-table/react-table.css'
 
 class SalesTable extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showDeleteConfirm: false,
+      deletedSale: {}
+    }
+  }
+
   componentDidMount = () => {
     this.props.getSales()
+  }
+
+  handleShowDeleteConfirm = (row) => {
+    this.setState({ 
+      showDeleteConfirm: true, 
+      deletedSale: {
+        id: row.id
+      }
+    })
+  }
+
+  handleCloseDeleteConfirm = () => {
+    this.setState({ showDeleteConfirm: false, deletedSale: {} })
+  }
+
+  handleDelete = () => {
+    this.props.deleteSale(this.state.deletedSale.id)
+    this.handleCloseDeleteConfirm()
   }
 
   render() {
@@ -18,7 +47,12 @@ class SalesTable extends Component {
       {
         Header: "Date",
         accessor: "date",
-        width:120
+        width: 160,
+        Cell: ({ value }) => (
+          <div>
+            {moment(value).format("DD-MM-YYYY HH:mm:ss")}
+          </div>
+        )
       },
       {
         Header: "Cust. ID",
@@ -60,7 +94,7 @@ class SalesTable extends Component {
       {
         Header: "Actions",
         Cell: (props) => {
-          return actionColumn(props)
+          return actionColumn(props, this.handleShowDeleteConfirm, this.props.onStartUpdate)
         },
         filterable: false,
         width: 172
@@ -79,6 +113,18 @@ class SalesTable extends Component {
           defaultFilterMethod={(filter, row) =>
             String(row[filter.id]).includes(filter.value)}
         />
+        <Modal show={this.state.showDeleteConfirm} onHide={this.handleCloseDeleteConfirm}>
+          <Modal.Header closeButton>
+            <Modal.Title>Deleting sale record</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Are you sure you want to delete this sale record?
+          </Modal.Body>
+          <Modal.Footer>
+            <GhostButton name="Cancel" onClick={this.handleCloseDeleteConfirm} />
+            <ButtonNormalDanger name="Delete" onClick={this.handleDelete} />
+          </Modal.Footer>
+        </Modal>
       </div>
     )
   }
@@ -89,7 +135,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  getSales
+  getSales,
+  deleteSale
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SalesTable)
