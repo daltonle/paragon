@@ -17,9 +17,7 @@ export const Appbar = (props) => (
     </div>
     <Link to="/sales" className={classNames({[styles.menuActive]: props.active === 'sales', [styles.section]: true})}>Sales</Link>
     <Link to="/customers" className={classNames({[styles.menuActive]: props.active === 'customers', [styles.section]: true})}>Customers</Link>
-    <div className={styles.section}>
-      Models
-    </div>
+    <Link to="/models" className={classNames({[styles.menuActive]: props.active === 'models', [styles.section]: true})}>Models</Link>
     <div className={styles.section}>
       Supplier
     </div>

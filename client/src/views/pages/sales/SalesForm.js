@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Formik } from 'formik'
-import Toggle from 'react-toggle'
 import Select from 'react-select'
 import PlusIcon from 'react-feather/dist/icons/plus'
 import XIcon from 'react-feather/dist/icons/x'

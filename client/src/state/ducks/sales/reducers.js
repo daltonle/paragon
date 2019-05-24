@@ -20,14 +20,14 @@ const reducer = (state = initialState, action) => {
         data: [ ...state.data, action.payload ]
       }
     case UPDATE_SALE_RECORD:
-      newData = [...state.data]
+      let newData = [...state.data]
       newData[newData.findIndex(d => d.id === action.payload.id)] = action.payload
       return {
         ...state,
         data: newData
       }
     case DELETE_SALE_RECORD:
-      let newData = [...state.data]
+      newData = [...state.data]
       newData.splice(newData.findIndex(d => d.id === action.payload), 1)
       return {
         ...state,

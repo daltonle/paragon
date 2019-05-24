@@ -1,3 +1,4 @@
 export { default as customers } from './customers/reducers'
 export { default as sales } from './sales/reducers'
 export { default as models } from './models/reducers'
+export { default as locations } from './locations/reducers'
