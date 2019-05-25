@@ -76,7 +76,32 @@ class ModelTable extends Component {
         width: 80,
         Cell: ({ value }) => (
           <span>$ {value}</span>
-        )
+        ),
+        filterMethod: (filter, row) => {
+          if (filter.value === "all") {
+            return true
+          }
+          else if (filter.value === "0") {
+            return row[filter.id] < 100
+          }
+          else if (filter.value === "1") {
+            return row[filter.id] > 100 && row[filter.id] <= 500
+          }
+          else if (filter.value === "2") {
+            return row[filter.id] > 500
+          }
+        },
+        Filter: ({ filter, onChange }) =>
+          <select
+            onChange={event => onChange(event.target.value)}
+            style={{ width: "100%" }}
+            value={filter ? filter.value : "all"}
+          >
+            <option value="all">Show all</option>
+            <option value="0">{`<$100`}</option>
+            <option value="1">{`$101-500`}</option>
+            <option value="2">{`>$500`}</option>
+          </select>
       },
       {
         Header: "Date acquired",

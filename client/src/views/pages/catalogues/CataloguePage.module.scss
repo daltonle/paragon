@@ -1,0 +1,30 @@
+@import '../../../styles/colors.scss';
+@import '../../../styles/font.scss';
+
+.outer {
+  display: flex;
+  flex-direction: row;
+}
+
+.appbar {
+  
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.content {
+  flex-grow: 1;
+  padding: 2rem 2.5rem 2.5rem 2.5rem;
+  height: 100vh;
+  overflow-y: auto;
+}

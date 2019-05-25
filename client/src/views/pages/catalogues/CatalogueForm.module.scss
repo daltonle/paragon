@@ -1,0 +1,82 @@
+@import '../../../styles/colors.scss';
+@import '../../../styles/font.scss';
+
+.buttonGroup {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+
+  .button {
+    margin-left: 1.5rem;
+  }
+}
+
+.form {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 40%;
+}
+
+.textField {
+  width: 100%;
+  background: #fff;
+  color: $black;
+  animation: ease-in-out .4s;
+  border: 1px solid $neutral-color-3;
+  outline: 0;
+  padding: .75rem 1rem;
+  border-radius: 6px;
+}
+
+label > span {
+  font-weight: $font-weight-semibold;
+}
+
+label > input {
+  margin-top: .5rem;
+  width: 100%;
+}
+
+label > textarea {
+  margin-top: .5rem;
+  width: 100%;
+  resize: none;
+}
+
+.textField:focus {
+  border: 1px solid $teal;
+  box-shadow: 0 0 1px $teal inset;
+}
+
+.textField:disabled {
+  background: $neutral-color-2;
+  color: $neutral-color-5;
+}
+
+h6.errors {
+  margin: 0;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: $red;
+  z-index: 0;
+}
+
+.supplier {
+  z-index: 999;
+  position: relative;
+}
+
+.model {
+  z-index: 998;
+  position: relative;
+}
+
+.selectInput {
+  margin-top: .5rem;
+}
+
+.price {
+  width: 10rem;
+}

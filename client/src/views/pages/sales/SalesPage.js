@@ -53,8 +53,8 @@ class SalesPage extends Component {
       const { customerId, discount, value, items, id } = this.state.updatedSale
       return (
         <SalesForm
-          onCancel={() => this.setState({ updating: false, updatedCustomer: {} })}
-          onFinish={() => this.setState({ updating: false, updatedCustomer: {} })}
+          onCancel={() => this.setState({ updating: false, updatedSale: {} })}
+          onFinish={() => this.setState({ updating: false, updatedSale: {} })}
           action="Edit"
           initial={{
             id,

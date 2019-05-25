@@ -52,7 +52,7 @@ class SupplierTable extends Component {
       {
         Header: "Name",
         accessor: "name",
-        width: 120
+        width: 200
       },
       {
         Header: "Address",

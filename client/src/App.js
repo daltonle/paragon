@@ -11,6 +11,7 @@ import ModelPage from "./views/pages/models/ModelPage"
 import LocationPage from "./views/pages/locations/LocationPage"
 import SupplierPage from "./views/pages/suppliers/SupplierPage"
 import UserPage from "./views/pages/users/UserPage"
+import CataloguePage from "./views/pages/catalogues/CataloguePage"
 
 class App extends Component {
   render() {
@@ -26,6 +27,7 @@ class App extends Component {
               <Route path='/locations' render={props => <LocationPage {...props} />} />
               <Route path='/suppliers' render={props => <SupplierPage {...props} />} />
               <Route path='/staff' render={props => <UserPage {...props} />} />
+              <Route path='/catalogues' render={props => <CataloguePage {...props} />} />
             </Switch>
           </div>
         </PersistGate>

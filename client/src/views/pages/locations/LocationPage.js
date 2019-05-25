@@ -49,8 +49,8 @@ class ModelPage extends Component {
       const { id, street, city, state, postcode } = this.state.updatedLocation
       return (
         <LocationForm
-          onCancel={() => this.setState({ updating: false, updatedModel: {} })}
-          onFinish={() => this.setState({ updating: false, updatedModel: {} })}
+          onCancel={() => this.setState({ updating: false, updatedLocation: {} })}
+          onFinish={() => this.setState({ updating: false, updatedLocation: {} })}
           action="Edit"
           initial={{
             id,
