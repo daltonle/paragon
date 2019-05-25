@@ -1,7 +1,7 @@
 [
   {
     "model": "productModel.supplier",
-    "pk": 100,
+    "pk": 1,
     "fields": {
       "name": "Arclytics",
       "address": "33 Macquarie St., Sydney NSW 2000",
