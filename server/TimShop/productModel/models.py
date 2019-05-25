@@ -10,8 +10,8 @@ class Supplier(models.Model):
     creditLine = models.CharField(max_length=10, null=True, blank=True)
     hasCreditLine = models.BooleanField(default=False, null=False)
     balance = models.DecimalField(null=False, max_digits=6, decimal_places=2)
-    deliveryNotes = models.CharField(max_length=255)
-    contactPerson = models.CharField(max_length=255)
+    deliveryNotes = models.CharField(max_length=255, null=True, blank=True)
+    contactPerson = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -25,7 +25,7 @@ class PModel(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     dateAcquired = models.DateField(null=False, blank=False)
     location = models.ForeignKey("locations.Location", null=True,on_delete=models.SET_NULL)
-    description = models.CharField(max_length=500, null=True)
+    description = models.CharField(max_length=500, null=True, blank=True)
     availability = models.BooleanField(null=False, default=False)
 
     def __str__(self):

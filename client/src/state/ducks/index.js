@@ -1,1 +1,5 @@
-export { default as reducer1 } from './reducer1/reducers'
+export { default as customers } from './customers/reducers'
+export { default as sales } from './sales/reducers'
+export { default as models } from './models/reducers'
+export { default as locations } from './locations/reducers'
+export { default as suppliers } from './suppliers/reducers'
