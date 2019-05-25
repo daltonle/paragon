@@ -59,8 +59,8 @@ class UserPage extends Component {
         locationOptions = this.props.locations.map(l => ({ value: l.id, label: `${l.city} ${l.state} ${l.postcode}` }))
       return (
         <UserForm
-          onCancel={() => this.setState({ updating: false, updatedModel: {} })}
-          onFinish={() => this.setState({ updating: false, updatedModel: {} })}
+          onCancel={() => this.setState({ updating: false, updatedUser: {} })}
+          onFinish={() => this.setState({ updating: false, updatedUser: {} })}
           action="Edit"
           initial={{
             id,

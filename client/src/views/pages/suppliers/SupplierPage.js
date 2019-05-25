@@ -52,8 +52,8 @@ class SupplierPage extends Component {
     else if (this.state.updating) {
       return (
         <SupplierForm
-          onCancel={() => this.setState({ updating: false, updatedModel: {} })}
-          onFinish={() => this.setState({ updating: false, updatedModel: {} })}
+          onCancel={() => this.setState({ updating: false, updatedSupplier: {} })}
+          onFinish={() => this.setState({ updating: false, updatedSupplier: {} })}
           action="Edit"
           initial={this.state.updatedSupplier}
           onSubmit={this.props.updateSupplier}

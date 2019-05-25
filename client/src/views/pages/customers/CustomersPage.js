@@ -44,7 +44,7 @@ class CustomersPage extends Component {
             phone: '',
             creditLine: '',
             hasCreditLine: false,
-            balance: 0,
+            balance: "0",
             isMember: false,
             subjectInterests: [],
             modelTypeInterests: []
