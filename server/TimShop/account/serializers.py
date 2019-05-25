@@ -114,8 +114,10 @@ class UserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-#inherit from Userserializer
-class ChangePasswordSerializer(UserSerializer):
+
+class ChangePasswordSerializer(UserSerializer):#inherit from Userserializer
+    """ Serializer for password change endpoint."""
+    # current_password of user that performing changing password action
     current_password = serializers.CharField(write_only=True,style={'input_type': 'password', 'placeholder': 'current password'})
 
     class Meta:
