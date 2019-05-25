@@ -7,7 +7,9 @@ from rest_framework import viewsets
 from .serializers import (
     UserSerializer,
     ProfileSerializer,
-    UserLoginSerializer
+    UserLoginSerializer,
+    ChangePasswordSerializer
+
 )
 
 from django.contrib.auth import get_user_model
@@ -35,11 +37,6 @@ def jwt_response_payload_handler(token, user=None, request=None):
         'user': UserSerializer(user).data
     }
 
-class RegisterView(CreateAPIView):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
-    permission_classes = [AllowAny,]
-
 class UserLoginAPIView(APIView):
     permission_classes = [AllowAny,]
     serializer_class = UserLoginSerializer
@@ -51,6 +48,14 @@ class UserLoginAPIView(APIView):
             print(new_data)
             return Response(new_data,status=HTTP_200_OK)
         return Response(serializer.errors,status=HTTP_400_BAD_REQUEST)
+
+class ChangePasswordView(UpdateAPIView):
+    """
+    An endpoint for changing password.
+    """
+    serializer_class = ChangePasswordSerializer
+    queryset = User.objects.all()
+    permission_classes = [IsLoggedInUserOrAdmin,]#only superuser or owner of the account can change password
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -68,13 +73,14 @@ class UserViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
 
 
-class LogoutView(APIView):
 
-    def post(self,request,format=None):
-        #delete token of the user
-        
-        request.user.auth_token.delete()
-        return Response(status=HTTP_200_OK)
+# class LogoutView(APIView):
+#
+#     def post(self,request,format=None):
+#         #delete token of the user
+#
+#         request.user.auth_token.delete()
+#         return Response(status=HTTP_200_OK)
 
 
 

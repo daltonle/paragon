@@ -7,7 +7,9 @@ from rest_framework_jwt.settings import api_settings
 
 User = get_user_model()
 
-
+""""
+serializer for profile
+"""
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
@@ -21,7 +23,17 @@ class ProfileSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+# class ChangePasswordSerializer(serializers.Serializer):
+#
+#     """
+#     Serializer for password change endpoint.
+#     """
+#     old_password = serializers.CharField(required=True)
+#     new_password = serializers.CharField(required=True)
+#
 
+
+#Serializer for custome user login
 class UserLoginSerializer(serializers.ModelSerializer):
     token = serializers.CharField(allow_blank=True, read_only=True)
     username = serializers.CharField()
@@ -78,10 +90,12 @@ class UserSerializer(serializers.ModelSerializer):
             last_name=validated_data['last_name'],
         )
         user_obj.set_password(validated_data['password'])
-        user_obj.save()
         profile_data = validated_data.pop('profile')
+        if profile_data["group"] == "Staff":
+            user_obj.is_staff = True
+        user_obj.save()
         Profile.objects.create(owner = user_obj, **profile_data)
-        return validated_data
+        return user_obj
 
     def update(self, instance, validated_data):
         instance.username = validated_data.get('username',instance.username)
@@ -89,7 +103,7 @@ class UserSerializer(serializers.ModelSerializer):
         instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.last_name = validated_data.get(' last_name', instance. last_name)
         profile_data = validated_data.pop('profile')
-        if instance.profile is not None:
+        if hasattr(instance, 'profile'):#check if the user has a profile
             profile = instance.profile
             profile.address = profile_data.get('address', profile.address)
             profile.phoneNum = profile_data.get('phoneNum', profile.phoneNum)
@@ -97,10 +111,36 @@ class UserSerializer(serializers.ModelSerializer):
             profile.location = profile_data.get('location', profile.location)
             profile.save()
         else:
+
             Profile.objects.create(owner = instance, **profile_data)
         instance.save()
         return instance
 
 
+class ChangePasswordSerializer(UserSerializer):#inherit from Userserializer
+    """ Serializer for password change endpoint."""
+    # current_password of user that performing changing password action
+    current_password = serializers.CharField(write_only=True,style={'input_type': 'password', 'placeholder': 'current password'})
+
+    class Meta:
+        model = User
+        fields = ['current_password','password','repassword']
+
+    # check if user current password is correct
+    def validate(self, data):
+        if not self.context['request'].user.check_password(data.get('current_password')):
+            raise serializers.ValidationError({'old_password': 'Wrong password.'})
+        if data.get('repassword') != data.get('password'):
+            raise serializers.ValidationError("password does not match")
+
+        return data
+
+    def create(self):
+        pass
+
+    def update(self, instance, validated_data):
+        instance.set_password(validated_data['password'])
+        instance.save()
+        return instance
 
 

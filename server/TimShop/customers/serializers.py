@@ -1,6 +1,9 @@
 from .models import Customer, Subject, Type
 from rest_framework import serializers
 
+#refactoring function to extract data from subject and type interest since they both have similar paraneter list
+
+
 
 class SubjectSerializer(serializers.ModelSerializer):
 
@@ -48,10 +51,10 @@ class CustomerSerializer(serializers.ModelSerializer):
             Type.objects.create(**t, customer = customer_obj)
         return customer_obj
 
+
+
     #override update for nested serializer
     def update(self, instance, validated_data):
-        subject_data = validated_data.pop('subject')
-        type_data = validated_data.pop('type')
         # set new value for customer if validated else keep the same
         instance.name = validated_data.get("name", instance.name)
         instance.email = validated_data.get("email", instance.email)
@@ -63,35 +66,26 @@ class CustomerSerializer(serializers.ModelSerializer):
         instance.isMember = validated_data.get("isMember", instance.isMember)
         instance.joinDate = validated_data.get("joinDate", instance.joinDate)
         instance.save()
-
-        keep_subject = [] #keep name of subject that customer have
-        # check if customer already has the subject or not
-        for subject in subject_data:
-            if Subject.objects.filter(name=subject["name"], customer = instance).exists():
-                    keep_subject.append(subject["name"])
-            else:
-                s = Subject.objects.create(**subject, customer=instance)
-                keep_subject.append(s.name)
-
-        # delete subject interest that is not in array of keep subject
-        for subject in instance.subject.all():
-            if subject.name not in keep_subject:
-                subject.delete()
-
-        # same pattern could be turned into a function maybe?
-        keep_type =[]
-        for type in type_data:
-            if Type.objects.filter(name=type["name"], customer = instance).exists():
-                   keep_type.append(type["name"])
-            else:
-                t = Type.objects.create(**type, customer = instance)
-                keep_type.append(t.name)
-
-        for type in instance.type.all():
-            if type.name not in keep_type:
-                type.delete()
-
+        interestUpdate(self,validated_data,instance,'subject')
+        interestUpdate(self,validated_data,instance,'type')
         return instance
+
+def interestUpdate(self, validated_data, instance, column):
+    types = {'type': Type, 'subject': Subject}
+    col = {'type': instance.type, 'subject': instance.subject}
+    keep = []
+    datas = validated_data.pop(column)
+    for data in datas:
+        if types[column].objects.filter(name=data["name"], customer=instance).exists():
+            keep.append(data["name"])
+        else:
+            t = types[column].objects.create(**data, customer=instance)
+            keep.append(t.name)
+    for data in col[column].all():
+        if data.name not in keep:
+            data.delete()
+
+
 
 
 

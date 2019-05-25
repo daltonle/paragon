@@ -4,20 +4,20 @@ from rest_framework import routers
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 from .views import (
-    RegisterView,
     UserViewSet,
     UserLoginAPIView,
-    LogoutView
+    # LogoutView,
+    ChangePasswordView
 )
 
 router = routers.DefaultRouter()
 router.register('users', UserViewSet)
 urlpatterns = [
     path('', include(router.urls)),
-    path('register/', RegisterView.as_view(), name='register'),
     # path('login/',UserLoginAPIView.as_view(),name='login'),
     path('login/', obtain_jwt_token, name='login'),
     # path('token-refresh',refresh_jwt_token, name='refresh-token'),
-    path('logout/', LogoutView.as_view(), name='logout'),
+    # path('logout/', LogoutView.as_view(), name='logout'),
+    path('users/<int:pk>/change_password/', ChangePasswordView.as_view(), name='change_password')
 
 ]
