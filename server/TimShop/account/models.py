@@ -15,7 +15,7 @@ class Profile(models.Model):
     #additional information of customer here is we need to add more
     created_date = models.DateTimeField(auto_now_add=True)
     address = models.CharField(max_length=255,null=True, blank=True)
-    phoneNum = models.IntegerField(null=True, blank=True)
+    phoneNum = models.CharField(max_length=255, null=True, blank=True)
     group = models.CharField(max_length=1, choices=GROUP_CHOICES, default="Staff")
     location = models.ForeignKey("locations.Location", null=True,on_delete=models.SET_NULL)
     
