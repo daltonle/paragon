@@ -10,6 +10,7 @@ import LoginPage from "./views/pages/login/LoginPage"
 import ModelPage from "./views/pages/models/ModelPage"
 import LocationPage from "./views/pages/locations/LocationPage"
 import SupplierPage from "./views/pages/suppliers/SupplierPage"
+import UserPage from "./views/pages/users/UserPage"
 
 class App extends Component {
   render() {
@@ -24,6 +25,7 @@ class App extends Component {
               <Route path='/models' render={props => <ModelPage {...props}/>} />
               <Route path='/locations' render={props => <LocationPage {...props} />} />
               <Route path='/suppliers' render={props => <SupplierPage {...props} />} />
+              <Route path='/staff' render={props => <UserPage {...props} />} />
             </Switch>
           </div>
         </PersistGate>

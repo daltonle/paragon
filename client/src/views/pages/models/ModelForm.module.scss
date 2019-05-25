@@ -15,7 +15,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 60%;
 }
 
@@ -31,7 +31,7 @@
 }
 
 label > span {
-  font-weight: $font-weight-heavy;
+  font-weight: $font-weight-semibold;
 }
 
 label > input {
@@ -60,7 +60,7 @@ h6.errors {
   margin-top: 1rem;
   margin-bottom: 1rem;
   color: $red;
-  z-index: -1;
+  z-index: 0;
 }
 
 .subjectType {

@@ -20,7 +20,7 @@ export const Appbar = (props) => (
     <Link to="/models" className={classNames({[styles.menuActive]: props.active === 'models', [styles.section]: true})}>Models</Link>
     <div className={styles.header}>
     </div>
-    <Link to="/users" className={classNames({[styles.menuActive]: props.active === 'users', [styles.section]: true})}>Users</Link>
+    <Link to="/staff" className={classNames({[styles.menuActive]: props.active === 'users', [styles.section]: true})}>Staff</Link>
     <Link to="/locations" className={classNames({[styles.menuActive]: props.active === 'locations', [styles.section]: true})}>Locations</Link>
     <div className={styles.header}>
     </div>
