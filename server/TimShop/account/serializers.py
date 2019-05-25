@@ -7,7 +7,9 @@ from rest_framework_jwt.settings import api_settings
 
 User = get_user_model()
 
-
+""""
+serializer for profile
+"""
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
@@ -21,14 +23,17 @@ class ProfileSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-class ChangePasswordSerializer(serializers.Serializer):
+# class ChangePasswordSerializer(serializers.Serializer):
+#
+#     """
+#     Serializer for password change endpoint.
+#     """
+#     old_password = serializers.CharField(required=True)
+#     new_password = serializers.CharField(required=True)
+#
 
-    """
-    Serializer for password change endpoint.
-    """
-    old_password = serializers.CharField(required=True)
-    new_password = serializers.CharField(required=True)
 
+#Serializer for custome user login
 class UserLoginSerializer(serializers.ModelSerializer):
     token = serializers.CharField(allow_blank=True, read_only=True)
     username = serializers.CharField()
@@ -109,6 +114,29 @@ class UserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+#inherit from Userserializer
+class ChangePasswordSerializer(UserSerializer):
+    current_password = serializers.CharField(write_only=True,style={'input_type': 'password', 'placeholder': 'current password'})
 
+    class Meta:
+        model = User
+        fields = ['current_password','password','repassword']
+
+    # check if user current password is correct
+    def validate(self, data):
+        if not self.context['request'].user.check_password(data.get('current_password')):
+            raise serializers.ValidationError({'old_password': 'Wrong password.'})
+        if data.get('repassword') != data.get('password'):
+            raise serializers.ValidationError("password does not match")
+
+        return data
+
+    def create(self):
+        pass
+
+    def update(self, instance, validated_data):
+        instance.set_password(validated_data['password'])
+        instance.save()
+        return instance
 
 
