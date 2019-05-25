@@ -5,16 +5,16 @@ from .models import BlackListedToken
 class IsLoggedInUserOrAdmin(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
-        return obj == request.user or request.user.is_superuser or request.user.profile.group=="Admin"
+        return obj == request.user or request.user.is_superuser or is_admin(request)
 
 
 class IsSuperUser(permissions.BasePermission):
 
     def has_permission(self, request, view):
-        return request.user and (request.user.is_superuser or request.user.profile.group=="Admin")
+        return request.user and (request.user.is_superuser or is_admin(request))
 
     def has_object_permission(self, request, view, obj):
-        return request.user and (request.user.is_superuser or request.user.profile.group=="Admin")
+        return request.user and (request.user.is_superuser or is_admin(request))
 
 
 class IsTokenValid(permissions.BasePermission):
@@ -29,3 +29,8 @@ class IsTokenValid(permissions.BasePermission):
         except BlackListedToken.DoesNotExist:
             is_allowed_user = True
         return is_allowed_user
+
+def is_admin(request):
+    if hasattr(request.user, 'profile'):
+        return request.user.profile.group == "Admin"
+    return False
