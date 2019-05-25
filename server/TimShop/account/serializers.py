@@ -90,10 +90,12 @@ class UserSerializer(serializers.ModelSerializer):
             last_name=validated_data['last_name'],
         )
         user_obj.set_password(validated_data['password'])
-        user_obj.save()
         profile_data = validated_data.pop('profile')
+        if profile_data["group"] == "Staff":
+            user_obj.is_staff = True
+        user_obj.save()
         Profile.objects.create(owner = user_obj, **profile_data)
-        return validated_data
+        return user_obj
 
     def update(self, instance, validated_data):
         instance.username = validated_data.get('username',instance.username)
@@ -101,7 +103,7 @@ class UserSerializer(serializers.ModelSerializer):
         instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.last_name = validated_data.get(' last_name', instance. last_name)
         profile_data = validated_data.pop('profile')
-        if instance.profile is not None:
+        if hasattr(instance, 'profile'):#check if the user has a profile
             profile = instance.profile
             profile.address = profile_data.get('address', profile.address)
             profile.phoneNum = profile_data.get('phoneNum', profile.phoneNum)
