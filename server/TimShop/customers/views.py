@@ -20,7 +20,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         permission_classes = []
         if self.action == 'create' or self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update':
-            permission_classes = [IsAuthenticated,IsAdminUser]
+            permission_classes = [IsAuthenticated]
         elif self.action == 'list' or self.action == 'destroy':
-            permission_classes = [IsSuperUser]
+            permission_classes = [IsAuthenticated]
         return [permission() for permission in permission_classes]

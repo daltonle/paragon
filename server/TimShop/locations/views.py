@@ -15,8 +15,8 @@ class LocationViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         permission_classes = []
-        if self.action == 'create' or self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update':
-            permission_classes = [IsAuthenticated,IsAdminUser]
-        elif self.action == 'list' or self.action == 'destroy':
+        if self.action == 'list' or self.action == 'retrieve':
+            permission_classes = [IsAuthenticated,]
+        elif self.action == 'destroy' or self.action == 'create' or self.action == 'update' or self.action == 'partial_update':
             permission_classes = [IsSuperUser]
         return [permission() for permission in permission_classes]

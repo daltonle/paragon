@@ -20,9 +20,9 @@ class PModelViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         permission_classes = []
         if self.action == 'create' or self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update':
-            permission_classes = [IsAuthenticated, IsAdminUser]
+            permission_classes = [IsAuthenticated]
         elif self.action == 'list' or self.action == 'destroy':
-            permission_classes = [IsSuperUser]
+            permission_classes = [IsAuthenticated]
         return [permission() for permission in permission_classes]
 
 
@@ -32,9 +32,9 @@ class SupplierViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         permission_classes = []
-        if self.action == 'create' or self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update':
-            permission_classes = [IsAuthenticated, IsAdminUser]
-        elif self.action == 'list' or self.action == 'destroy':
+        if self.action == 'list' or self.action == 'retrieve':
+            permission_classes = [IsAuthenticated]
+        elif self.action == 'create' or self.action == 'destroy' or self.action == 'update' or self.action == 'partial_update':
             permission_classes = [IsSuperUser]
         return [permission() for permission in permission_classes]
 
@@ -46,9 +46,9 @@ class SupplierCatalogueViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         permission_classes = []
-        if self.action == 'create' or self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update':
-            permission_classes = [IsAuthenticated, IsAdminUser]
-        elif self.action == 'list' or self.action == 'destroy':
+        if self.action == 'list' or self.action == 'retrieve' :
+            permission_classes = [IsAuthenticated]
+        elif self.action == 'create' or self.action == 'destroy' or self.action == 'update' or self.action == 'partial_update':
             permission_classes = [IsSuperUser]
         return [permission() for permission in permission_classes]
 
@@ -59,8 +59,8 @@ class OrderHistoryViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         permission_classes = []
-        if self.action == 'create' or self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update':
-            permission_classes = [IsAuthenticated, IsAdminUser]
-        elif self.action == 'list' or self.action == 'destroy':
-            permission_classes = [IsSuperUser]
+        if self.action == 'list' or self.action == 'retrieve':
+            permission_classes = [IsAuthenticated]
+        elif  self.action == 'create' or self.action == 'destroy' or self.action == 'update' or self.action == 'partial_update':
+            permission_classes = [IsAuthenticated]
         return [permission() for permission in permission_classes]
