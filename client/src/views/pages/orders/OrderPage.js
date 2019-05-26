@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Appbar } from '../../components/appbar/Appbar'
+import Appbar from '../../components/appbar/Appbar'
 import OrderHistoryTable from '../../components/tables/OrderHistoryTable'
 import { ButtonNormal } from '../../components/buttons/Buttons'
 import OrderForm from './OrderForm'

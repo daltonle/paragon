@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Appbar } from '../../components/appbar/Appbar'
+import Appbar from '../../components/appbar/Appbar'
 import LocationTable from '../../components/tables/LocationTable'
 import { ButtonNormal } from '../../components/buttons/Buttons'
 import LocationForm from './LocationForm'
 import { addLocation, updateLocation } from '../../../state/ducks/locations/actions'
+import ErrorPage from '../errors/ErrorPage'
 
 import styles from './LocationPage.module.scss'
 
-class ModelPage extends Component {
+class LocationPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -75,18 +76,22 @@ class ModelPage extends Component {
   }
 
   render() {
-    return (
-      <div className={styles.outer}>
-        <div className={styles.appbar}>
-          <Appbar active="locations" history={this.props.history} />
+    if (this.props.role === "Staff")
+      return <ErrorPage history={this.props.history} />
+    else if (this.props.role === "Admin")
+      return (
+        <div className={styles.outer}>
+          <div className={styles.appbar}>
+            <Appbar active="locations" history={this.props.history} />
+          </div>
+          {this.renderContent()}
         </div>
-        {this.renderContent()}
-      </div>
-    )
+      )
   }
 }
 
 const mapStateToProps = (state) => ({
+  role: state.user.profile.group
 })
 
 const mapDispatchToProps = {
@@ -94,4 +99,4 @@ const mapDispatchToProps = {
   updateLocation
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModelPage)
+export default connect(mapStateToProps, mapDispatchToProps)(LocationPage)

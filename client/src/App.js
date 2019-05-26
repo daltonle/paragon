@@ -13,6 +13,7 @@ import SupplierPage from "./views/pages/suppliers/SupplierPage"
 import UserPage from "./views/pages/users/UserPage"
 import CataloguePage from "./views/pages/catalogues/CataloguePage"
 import OrderPage from "./views/pages/orders/OrderPage"
+import ErrorPage from "./views/pages/errors/ErrorPage"
 
 class App extends Component {
   render() {
@@ -21,15 +22,16 @@ class App extends Component {
         <PersistGate loading={null} persistor={persistor}>
           <div className="App">
             <Switch>
+              <Route exact path={['/', '/sales']} render={props => <SalesPage {...props}/>} />
               <Route path='/login' render={props => <LoginPage {...props}/>} />
               <Route path='/customers' render={props => <CustomersPage {...props}/>} />
-              <Route exact path={['/', '/sales']} render={props => <SalesPage {...props}/>} />
               <Route path='/models' render={props => <ModelPage {...props}/>} />
               <Route path='/locations' render={props => <LocationPage {...props} />} />
               <Route path='/suppliers' render={props => <SupplierPage {...props} />} />
               <Route path='/staff' render={props => <UserPage {...props} />} />
               <Route path='/catalogues' render={props => <CataloguePage {...props} />} />
               <Route path='/stock-order' render={props => <OrderPage {...props} />} />
+              <Route render={props => <ErrorPage {...props}/>} />
             </Switch>
           </div>
         </PersistGate>

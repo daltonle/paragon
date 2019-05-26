@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
-import { Appbar } from '../../components/appbar/Appbar'
+import Appbar from '../../components/appbar/Appbar'
 import ModelTable from '../../components/tables/ModelTable'
 import { ButtonNormal } from '../../components/buttons/Buttons'
 import ModelForm from './ModelForm'
@@ -79,7 +79,7 @@ class ModelPage extends Component {
       <div className={styles.content}>
         <div className={styles.header}>
           <h1>Models</h1>
-          <ButtonNormal name="Add record" className={styles.button} onClick={() => this.setState({ adding: true })} />
+          <ButtonNormal name="Add model" className={styles.button} onClick={() => this.setState({ adding: true })} />
         </div>
         <ModelTable onStartUpdate={this.startUpdating} />
       </div>

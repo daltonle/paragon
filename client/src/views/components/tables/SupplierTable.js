@@ -108,16 +108,18 @@ class SupplierTable extends Component {
         Header: "Contact person", 
         accessor: "contactPerson",
         style: { whiteSpace: 'unset' }
-      },
-      {
+      }
+    ]
+
+    if (this.props.role === "Admin")
+      columns.push({
         Header: "Actions",
         Cell: (props) => {
           return actionColumn(props, this.handleShowDeleteConfirm, this.props.onStartUpdate)
         },
         filterable: false,
         width: 172
-      }
-    ]
+      })
 
     return (
       <div>
@@ -149,7 +151,8 @@ class SupplierTable extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  data: state.suppliers.data
+  data: state.suppliers.data,
+  role: state.user.profile.group
 })
 
 const mapDispatchToProps = {

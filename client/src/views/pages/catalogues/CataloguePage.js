@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Appbar } from '../../components/appbar/Appbar'
+import Appbar from '../../components/appbar/Appbar'
 import CatalogueTable from '../../components/tables/CatalogueTable'
 import { ButtonNormal } from '../../components/buttons/Buttons'
 import CatalogueForm from './CatalogueForm'
@@ -70,7 +70,10 @@ class CataloguePage extends Component {
       <div className={styles.content}>
         <div className={styles.header}>
           <h1>Catalogues</h1>
-          <ButtonNormal name="Add item" className={styles.button} onClick={() => this.setState({ adding: true })} />
+          {this.props.role === "Admin" ?
+            <ButtonNormal name="Add item" className={styles.button} onClick={() => this.setState({ adding: true })} /> :
+            <div></div>
+          }
         </div>
         <CatalogueTable onStartUpdate={this.startUpdating} />
       </div>
@@ -91,7 +94,8 @@ class CataloguePage extends Component {
 
 const mapStateToProps = (state) => ({
   suppliers: state.suppliers.data,
-  models: state.models.data
+  models: state.models.data,
+  role: state.user.profile.group
 })
 
 const mapDispatchToProps = {

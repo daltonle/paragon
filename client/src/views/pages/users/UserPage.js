@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Appbar } from '../../components/appbar/Appbar'
+import Appbar from '../../components/appbar/Appbar'
 import UserTable from '../../components/tables/UserTable'
 import { ButtonNormal } from '../../components/buttons/Buttons'
 import UserForm from './UserForm'
 import { addUser, updateUser } from '../../../state/ducks/users/actions'
+import ErrorPage from "../errors/ErrorPage"
 
 import styles from './UserPage.module.scss'
 
@@ -90,19 +91,23 @@ class UserPage extends Component {
   }
 
   render() {
-    return (
-      <div className={styles.outer}>
-        <div className={styles.appbar}>
-          <Appbar active="users" history={this.props.history} />
+    if (this.props.role === "Staff")
+      return <ErrorPage history={this.props.history} />
+    else if (this.props.role === "Admin")
+      return (
+        <div className={styles.outer}>
+          <div className={styles.appbar}>
+            <Appbar active="users" history={this.props.history} />
+          </div>
+          {this.renderContent()}
         </div>
-        {this.renderContent()}
-      </div>
-    )
+      )
   }
 }
 
 const mapStateToProps = (state) => ({
-  locations: state.locations.data
+  locations: state.locations.data,
+  role: state.user.profile.group
 })
 
 const mapDispatchToProps = {

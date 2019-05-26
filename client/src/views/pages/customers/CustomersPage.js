@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Appbar } from '../../components/appbar/Appbar'
+import Appbar from '../../components/appbar/Appbar'
 import CustomersTable from '../../components/tables/CustomersTable'
 import { ButtonNormal } from '../../components/buttons/Buttons'
 import CustomerForm from './CustomerForm'
@@ -80,7 +80,7 @@ class CustomersPage extends Component {
       <div className={styles.content}>
         <div className={styles.header}>
           <h1>Customers</h1>
-          <ButtonNormal name="Add record" className={styles.button} onClick={() => this.setState({ adding: true })} />
+          <ButtonNormal name="Add customer" className={styles.button} onClick={() => this.setState({ adding: true })} />
         </div>
         <CustomersTable onStartUpdate={this.startUpdating} />
       </div>

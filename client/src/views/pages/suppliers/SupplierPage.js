@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Appbar } from '../../components/appbar/Appbar'
+import Appbar from '../../components/appbar/Appbar'
 import SupplierTable from '../../components/tables/SupplierTable'
 import { ButtonNormal } from '../../components/buttons/Buttons'
 import SupplierForm from './SupplierForm'
@@ -64,7 +64,10 @@ class SupplierPage extends Component {
       <div className={styles.content}>
         <div className={styles.header}>
           <h1>Suppliers</h1>
-          <ButtonNormal name="Add supplier" className={styles.button} onClick={() => this.setState({ adding: true })} />
+          {this.props.role === "Admin" ?
+            <ButtonNormal name="Add supplier" className={styles.button} onClick={() => this.setState({ adding: true })} /> :
+            <div></div>
+          }
         </div>
         <SupplierTable onStartUpdate={this.startUpdating} />
       </div>
@@ -84,6 +87,7 @@ class SupplierPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  role: state.user.profile.group
 })
 
 const mapDispatchToProps = {

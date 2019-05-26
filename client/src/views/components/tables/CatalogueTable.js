@@ -172,16 +172,18 @@ class ModelTable extends Component {
             <option value="1">{`$101-500`}</option>
             <option value="2">{`>$500`}</option>
           </select>
-      },
-      {
+      }
+    ]
+
+    if (this.props.role === "Admin")
+      columns.push({
         Header: "Actions",
         Cell: (props) => {
           return actionColumn(props, this.handleShowDeleteConfirm, this.props.onStartUpdate)
         },
         filterable: false,
         width: 172
-      }
-    ]
+      })
 
     return (
       <div>
@@ -216,7 +218,8 @@ class ModelTable extends Component {
 const mapStateToProps = (state) => ({
   data: state.catalogues.data,
   models: state.models.data,
-  suppliers: state.suppliers.data
+  suppliers: state.suppliers.data,
+  role: state.user.profile.group
 })
 
 const mapDispatchToProps = {
