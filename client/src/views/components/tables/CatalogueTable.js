@@ -145,7 +145,7 @@ class ModelTable extends Component {
         accessor: "price",
         width: 120,
         Cell: ({ value }) => <span>${value}</span>,
-        aggregate: (vals) => _.round(_.mean(vals.map(v => parseFloat(v)))),
+        aggregate: (vals) => _.round(_.mean(vals.map(v => parseFloat(v))), 2),
         Aggregated: row => <span>${row.value} (avg)</span>,
         filterMethod: (filter, row) => {
           if (filter.value === "all") {

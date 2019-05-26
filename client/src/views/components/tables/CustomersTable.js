@@ -179,7 +179,7 @@ class CustomersTable extends Component {
             <option value="week">This week</option>
             <option value="month">This month</option>
             <option value="6month">Last 6 months</option>
-            <option value="year">This year</option>
+            <option value="year">Past year</option>
           </select>
       },
       {
