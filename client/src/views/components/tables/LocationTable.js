@@ -48,8 +48,7 @@ class LocationTable extends Component {
       },
       {
         Header: "Street address",
-        accessor: "street",
-        width: 700
+        accessor: "street"
       },
       {
         Header: "City",

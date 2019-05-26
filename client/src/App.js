@@ -12,6 +12,7 @@ import LocationPage from "./views/pages/locations/LocationPage"
 import SupplierPage from "./views/pages/suppliers/SupplierPage"
 import UserPage from "./views/pages/users/UserPage"
 import CataloguePage from "./views/pages/catalogues/CataloguePage"
+import OrderPage from "./views/pages/orders/OrderPage"
 
 class App extends Component {
   render() {
@@ -28,6 +29,7 @@ class App extends Component {
               <Route path='/suppliers' render={props => <SupplierPage {...props} />} />
               <Route path='/staff' render={props => <UserPage {...props} />} />
               <Route path='/catalogues' render={props => <CataloguePage {...props} />} />
+              <Route path='/stock-order' render={props => <OrderPage {...props} />} />
             </Switch>
           </div>
         </PersistGate>
