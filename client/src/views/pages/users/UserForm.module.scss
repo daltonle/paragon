@@ -122,8 +122,10 @@ h6.errors {
   flex-direction: column;
 }
 
-.identity {
+.editPassword {
   margin-top: 1.5rem;
   z-index: 995;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }

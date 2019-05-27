@@ -250,7 +250,7 @@
       "supplierId": 1,
       "time": "2019-05-10T10:24:22Z",
       "value": "1200.00",
-      "items": "[{\"name\":\"Ford Mustang 2019\", \"quantity\": 10}]"
+      "items": "[{\"id\":\"50\",\"name\":\"Ford Mustang 2019\", \"quantity\": 10}]"
     }
   },
 

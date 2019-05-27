@@ -59,6 +59,14 @@ class UserForm extends Component {
           if (!values.profile.group) {
             errors.group = 'Required'
           }
+          if (values.newPassword) {
+            if (values.newPassword.length < 6)
+              errors.newPassword = 'Password has to be at least 6 characters.'
+            if (!values.reNewPassword)
+              errors.reNewPassword = 'Required'
+            else if (values.reNewPassword !== values.newPassword)
+              errors.reNewPassword = 'Password does not match'
+          }
           return errors
         }}
         onSubmit={(values, { setSubmitting, setStatus }) => {
@@ -81,7 +89,10 @@ class UserForm extends Component {
           }) => (
             <form onSubmit={handleSubmit} className={headerStyles.content}>
               <div className={headerStyles.header}>
-                <h1>{this.props.action} model</h1>
+                {this.props.action === "Profile" ? 
+                  <h1>Edit profile</h1> :
+                  <h1>{this.props.action} staff account</h1>
+                }
                 <div className={styles.buttonGroup}>
                   <GhostButton name="Cancel" className={styles.button} onClick={onCancel} />
                   <ButtonNormal name="Save" className={styles.button} type="submit" isSubmitting={isSubmitting} />
@@ -219,6 +230,7 @@ class UserForm extends Component {
                             primary: '#389589'
                           }
                         })}
+                        isDisabled={this.props.role === "Staff"}
                       />
                     </label>
                     <h6 className={styles.errors}>{errors.group}</h6>
@@ -237,11 +249,42 @@ class UserForm extends Component {
                           primary: '#389589'
                         }
                       })}
+                      isDisabled={this.props.role === "Staff"}
                     />
                   </label>
                 </div>
-                {this.props.action === "Edit" ?
-                  <div className={styles.identity}> 
+                {this.props.action !== "Add" ?
+                  <div className={styles.editPassword}> 
+                    <label>
+                      <span>Change password</span>
+                      <input
+                        defaultValue=""
+                        type="password"
+                        name="newPassword"
+                        onChange={e => {
+                          setFieldValue('newPassword', e.target.value)
+                        }}
+                        onBlur={handleBlur}
+                        placeholder="Enter new password"
+                        className={styles.textField}
+                      />
+                    </label>
+                    <h6 className={styles.errors}>{errors.newPassword && touched.newPassword && errors.newPassword}</h6>
+                    <label>
+                      <span>Confirm password</span>
+                      <input
+                        defaultValue=""
+                        type="password"
+                        name="reNewPassword"
+                        onChange={e => {
+                          setFieldValue('reNewPassword', e.target.value)
+                        }}
+                        onBlur={handleBlur}
+                        placeholder="Re-enter new password"
+                        className={styles.textField}
+                      />
+                    </label>
+                    <h6 className={styles.errors}>{errors.reNewPassword && touched.reNewPassword && errors.reNewPassword}</h6>
                     <label>
                       <span>Confirm your identity *</span>
                       <input
@@ -249,7 +292,6 @@ class UserForm extends Component {
                         type="password"
                         name="password"
                         onChange={e => {
-                          console.log(e.target.value)
                           setFieldValue('password', e.target.value)
                           setFieldValue('repassword', e.target.value)
                         }}
@@ -271,7 +313,8 @@ class UserForm extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  locations: state.locations.data
+  locations: state.locations.data,
+  role: state.user.profile.group
 })
 
 const mapDispatchToProps = {

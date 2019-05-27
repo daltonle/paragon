@@ -63,7 +63,6 @@ export const updateUser = (user) => dispatch => {
       location: user.profile.location.value
     }
   }
-  console.log(data)
 
   fetch(`http://localhost:8000/account/users/${user.id}/`, {
     method: 'PUT',
@@ -81,6 +80,30 @@ export const updateUser = (user) => dispatch => {
     })
   })
   .catch(err => console.log(err))
+
+  const { newPassword, reNewPassword } = user
+  if (newPassword) {
+    fetch(`http://localhost:8000/account/users/${user.id}/change_password/`, {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `JWT ${localStorage.getItem("ParagonToken")}`
+      },
+      body: JSON.stringify({
+        current_password: user.password,
+        password: newPassword,
+        repassword: reNewPassword
+      })
+    })
+    .then(res => res.json())
+    .then(res => {
+      dispatch({
+        type: UPDATE_USER,
+        payload: res
+      })
+    })
+    .catch(err => console.log(err))
+  }
 }
 
 export const deleteUser = (id) => dispatch => {

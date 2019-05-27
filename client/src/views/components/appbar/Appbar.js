@@ -10,11 +10,11 @@ import styles from './Appbar.module.scss'
  */
 class Appbar extends React.Component {
   render() {
-    const { active, role } = this.props
+    const { active, role, first_name, last_name } = this.props
     return (
       <div className={styles.container}>
         <div className={styles.username}>
-          timothy
+          {first_name} {last_name}
         </div>
         <div className={styles.header}></div>
         <Link to="/sales" className={classNames({[styles.menuActive]: active === 'sales', [styles.section]: true})}>Sales</Link>
@@ -29,6 +29,7 @@ class Appbar extends React.Component {
         <Link to="/suppliers" className={classNames({[styles.menuActive]: active === 'suppliers', [styles.section]: true})}>Suppliers</Link>
         <Link to="/catalogues" className={classNames({[styles.menuActive]: active === 'catalogues', [styles.section]: true})}>Catalogues</Link>
         <Link to="/stock-order" className={classNames({[styles.menuActive]: active === 'stockOrders', [styles.section]: true})}>Stock order</Link>
+        <Link to="/profile" className={classNames({[styles.menuActive]: active === 'profile', [styles.section]: true})}>Profile</Link>
         <div className={styles.logout} onClick={() => {
           localStorage.removeItem('ParagonToken')
           this.props.history.push('/login')
@@ -41,7 +42,9 @@ class Appbar extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  role: state.user.profile.group
+  role: state.user.profile.group,
+  first_name: state.user.first_name,
+  last_name: state.user.last_name
 })
 
 export default connect(mapStateToProps, {})(Appbar)

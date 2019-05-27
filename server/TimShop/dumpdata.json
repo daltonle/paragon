@@ -1,1 +1,0 @@
-[{"model": "customers.customer", "pk": 1, "fields": {"name": "Dalton", "email": "dalt@gmail.com", "address": "Sy", "phone": "098765432", "creditLine": "", "hasCreditLine": false, "balance": "0.00", "isMember": true, "joinDate": "2019-12-22T12:00:00Z"}}]

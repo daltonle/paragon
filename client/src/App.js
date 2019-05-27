@@ -14,6 +14,7 @@ import UserPage from "./views/pages/users/UserPage"
 import CataloguePage from "./views/pages/catalogues/CataloguePage"
 import OrderPage from "./views/pages/orders/OrderPage"
 import ErrorPage from "./views/pages/errors/ErrorPage"
+import ProfilePage from "./views/pages/users/ProfilePage"
 
 class App extends Component {
   render() {
@@ -31,6 +32,7 @@ class App extends Component {
               <Route path='/staff' render={props => <UserPage {...props} />} />
               <Route path='/catalogues' render={props => <CataloguePage {...props} />} />
               <Route path='/stock-order' render={props => <OrderPage {...props} />} />
+              <Route path='/profile' render={props => <ProfilePage {...props} />} />
               <Route render={props => <ErrorPage {...props}/>} />
             </Switch>
           </div>

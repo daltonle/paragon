@@ -116,7 +116,23 @@ class ModelTable extends Component {
           if (this.props.locations && this.props.locations.length !== 0)
             return <span>{this.props.locations[this.props.locations.findIndex(l => l.id === value)].city}</span>
           return <span>Not found</span>
-        }
+        },
+        filterMethod: (filter, row) => {
+          if (filter.value === "all") {
+            return true
+          }
+          else return row[filter.id] === parseInt(filter.value)
+        },
+        Filter: ({ filter, onChange }) =>
+          <select
+            onChange={event => onChange(event.target.value)}
+            style={{ width: "100%" }}
+            value={filter ? filter.value : "all"}
+          >
+            <option value="all">Show all</option>
+            <option value="1">Sydney</option>
+            <option value="2">Melbourne</option>
+          </select>
       },
       {
         Header: "Description",

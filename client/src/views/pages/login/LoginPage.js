@@ -29,6 +29,9 @@ class LoginPage extends Component {
               ) {
                 errors.username = 'Invalid username'
               }
+              if (!values.password) {
+                errors.password = 'Required'
+              }
               return errors
             }}
             onSubmit={(values, { setSubmitting, setStatus }) => {

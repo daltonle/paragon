@@ -45,6 +45,11 @@ class SalesTable extends Component {
     const { data } = this.props
     const columns = [
       {
+        Header: "ID",
+        accessor: "id",
+        width: 40
+      },
+      {
         Header: "Date",
         accessor: "date",
         width: 160,

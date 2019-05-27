@@ -153,7 +153,7 @@ class OrderForm extends Component {
           })
           return errors
         }}
-        onSubmit={(values, { setSubmitting, setStatus, setFieldValue, resetForm }) => {
+        onSubmit={(values, { setSubmitting, setStatus, setFieldValue, resetForm, setFieldError, setFieldTouched }) => {
           setSubmitting(true)
           values.value = this.calculateTotalValue(values)
           this.props.onSubmit(values)
@@ -161,6 +161,10 @@ class OrderForm extends Component {
           resetForm()
           setFieldValue('supplierId', undefined)
           setFieldValue('items', [])
+          setFieldError('supplier', '')
+          setFieldError('superitems', '')
+          setFieldTouched('supplier', false)
+          setFieldTouched('superitems', false)
         }}
       >
         {({
