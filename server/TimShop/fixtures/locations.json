@@ -1,0 +1,22 @@
+[
+  {
+    "model": "locations.location",
+    "pk": 1,
+    "fields": {
+      "street": "24 Wallaby Way",
+      "city": "Sydney",
+      "state": "NSW",
+      "postcode": 2500
+    }
+  },
+  {
+    "model": "locations.location",
+    "pk": 2,
+    "fields": {
+      "street": "128 Camden St.",
+      "city": "Melbourne",
+      "state": "VIC",
+      "postcode": 2630
+    }
+  }
+]

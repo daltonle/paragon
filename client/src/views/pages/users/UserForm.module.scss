@@ -1,0 +1,131 @@
+@import '../../../styles/colors.scss';
+@import '../../../styles/font.scss';
+
+.buttonGroup {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+
+  .button {
+    margin-left: 1.5rem;
+  }
+}
+
+.form {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 60%;
+
+  label {
+    width: 100%;
+  }
+}
+
+.textField {
+  width: 100%;
+  background: #fff;
+  color: $black;
+  animation: ease-in-out .4s;
+  border: 1px solid $neutral-color-3;
+  outline: 0;
+  padding: .75rem 1rem;
+  border-radius: 6px;
+}
+
+label {
+  display: block;
+}
+
+label > span {
+  font-weight: $font-weight-semibold;
+}
+
+label > input {
+  margin-top: .5rem;
+}
+
+.formButton {
+  display: block;
+  border: 0;
+  outline: 0;
+  transition: all 200ms ease-in;
+  cursor: pointer;
+  background: $teal;
+  color: $text-white;
+  width: 100%;
+  padding: .75rem .75rem .75rem .75rem;
+  margin-top: 1rem;
+  text-align: center;
+  border-radius: 3px;
+}
+
+.textField:focus {
+  border: 1px solid $teal;
+  box-shadow: 0 0 1px $teal inset;
+}
+
+.textField:disabled {
+  background: $neutral-color-2;
+  color: $neutral-color-5;
+}
+
+h6.errors {
+  margin: 0;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: $red;
+  z-index: 0;
+  flex-shrink: 0;
+}
+
+.name {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-shrink: 0;
+  margin-bottom: 1rem;
+
+  &>div {
+    flex-basis: 45%;
+  }
+}
+
+.email, .username {
+  width: 60%;
+}
+
+.selectInput {
+  margin-top: .5rem;
+}
+
+.roleLoc {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  z-index: 996;
+  position: relative;
+
+  .role {
+    flex-basis: 30%;
+  }
+
+  .location {
+    margin-left: 2.5rem;
+  }
+}
+
+.password {
+  display: flex;
+  flex-direction: column;
+}
+
+.editPassword {
+  margin-top: 1.5rem;
+  z-index: 995;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}

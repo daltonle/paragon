@@ -1,0 +1,12 @@
+.animateInfiniteRotate {
+  animation: infiniteRotate 1s infinite linear;
+}
+
+@keyframes infiniteRotate {
+  from {
+    transform: rotate(359deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
